@@ -25,13 +25,26 @@ export const PixelTree = ({ type, animate, size = "sm" }: { type: string; animat
 
   const treeShapes: Record<string, React.ReactNode> = {
     mango: (
-      // Round wide canopy with hanging fruits
+      // Lush mango tree with wide layered canopy and hanging fruits
       <div className="flex flex-col items-center">
-        <div className={`${s ? "w-10 h-4" : "w-6 h-2.5"} bg-emerald-700 rounded-full relative`}>
-          <div className={`absolute ${s ? "bottom-0 left-1.5 w-1.5 h-1.5" : "bottom-0 left-0.5 w-1 h-1"} bg-amber-400 rounded-full`} />
-          <div className={`absolute ${s ? "bottom-0 right-2 w-1.5 h-1.5" : "bottom-0 right-1 w-1 h-1"} bg-amber-400 rounded-full`} />
+        {/* Top canopy layer */}
+        <div className={`${s ? "w-8 h-3" : "w-5 h-2"} bg-emerald-600 rounded-full relative z-10`} />
+        {/* Middle canopy — widest */}
+        <div className={`${s ? "w-12 h-5 -mt-1.5" : "w-7 h-3 -mt-1"} bg-emerald-700 rounded-full relative z-20`}>
+          {/* Inner leaf texture */}
+          <div className={`absolute ${s ? "top-0.5 left-2 w-3 h-2" : "top-0 left-1 w-2 h-1.5"} bg-emerald-600 rounded-full`} />
+          <div className={`absolute ${s ? "top-1 right-1.5 w-2.5 h-2" : "top-0.5 right-1 w-1.5 h-1"} bg-green-700 rounded-full`} />
+          {/* Hanging mangoes */}
+          <div className={`absolute ${s ? "-bottom-1 left-2 w-2 h-2.5" : "-bottom-0.5 left-1 w-1 h-1.5"} bg-amber-400 rounded-full`} />
+          <div className={`absolute ${s ? "-bottom-1.5 right-3 w-2 h-2.5" : "-bottom-1 right-1.5 w-1 h-1.5"} bg-yellow-500 rounded-full`} />
+          <div className={`absolute ${s ? "-bottom-0.5 left-5 w-1.5 h-2" : "-bottom-0.5 left-3 w-1 h-1"} bg-amber-500 rounded-full`} />
         </div>
-        <div className={`${s ? "w-1 h-4" : "w-0.5 h-2.5"} bg-amber-900`} />
+        {/* Trunk — thick and sturdy */}
+        <div className={`${s ? "w-2 h-5" : "w-1 h-3"} bg-amber-900 rounded-sm relative`}>
+          {/* Small branch stubs */}
+          <div className={`absolute ${s ? "top-0.5 -left-1.5 w-2 h-0.5" : "top-0 -left-1 w-1.5 h-px"} bg-amber-800 rounded-full -rotate-12`} />
+          <div className={`absolute ${s ? "top-1.5 -right-1 w-1.5 h-0.5" : "top-1 -right-0.5 w-1 h-px"} bg-amber-800 rounded-full rotate-12`} />
+        </div>
       </div>
     ),
     neem: (
