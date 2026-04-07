@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { PixelTree } from "@/components/GardenWidget";
 
 type Stage = "seed" | "water" | "tree" | null;
 
@@ -43,7 +44,9 @@ export function GamificationOverlay({ stage, treeType, onDismiss }: Gamification
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-background/80 backdrop-blur-sm animate-fade-in">
       <div className="surface border border-border rounded-xl p-8 max-w-xs text-center">
-        <div className="text-5xl mb-4">{c.emoji}</div>
+        <div className="text-5xl mb-4">
+          {stage === "tree" ? <PixelTree type={treeType} size="lg" animate /> : c.emoji}
+        </div>
         <h3 className="font-mono text-foreground text-sm font-bold mb-2">{c.title}</h3>
 
         {step === "intro" && (
