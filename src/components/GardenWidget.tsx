@@ -20,7 +20,7 @@ const PixelSprout = ({ animate }: { animate?: boolean }) => (
   </div>
 );
 
-const PixelTree = ({ type, animate, size = "sm" }: { type: string; animate?: boolean; size?: "sm" | "lg" }) => {
+export const PixelTree = ({ type, animate, size = "sm" }: { type: string; animate?: boolean; size?: "sm" | "lg" }) => {
   const s = size === "lg";
 
   const treeShapes: Record<string, React.ReactNode> = {
