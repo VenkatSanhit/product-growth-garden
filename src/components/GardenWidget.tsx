@@ -20,33 +20,116 @@ const PixelSprout = ({ animate }: { animate?: boolean }) => (
   </div>
 );
 
-const PixelTree = ({ type, animate }: { type: string; animate?: boolean }) => {
-  const colors: Record<string, { canopy: string; fruit: string }> = {
-    mango: { canopy: "bg-emerald-700", fruit: "bg-amber-400" },
-    neem: { canopy: "bg-green-800", fruit: "bg-green-400" },
-    date: { canopy: "bg-emerald-600", fruit: "bg-amber-700" },
-    banyan: { canopy: "bg-green-900", fruit: "bg-green-300" },
-    cherry: { canopy: "bg-pink-900", fruit: "bg-pink-400" },
-    oak: { canopy: "bg-green-800", fruit: "bg-amber-600" },
-    pine: { canopy: "bg-emerald-900", fruit: "bg-emerald-400" },
-    maple: { canopy: "bg-red-900", fruit: "bg-orange-500" },
-    bamboo: { canopy: "bg-lime-700", fruit: "bg-lime-400" },
-    willow: { canopy: "bg-teal-800", fruit: "bg-teal-400" },
+export const PixelTree = ({ type, animate, size = "sm" }: { type: string; animate?: boolean; size?: "sm" | "lg" }) => {
+  const s = size === "lg";
+
+  const treeShapes: Record<string, React.ReactNode> = {
+    mango: (
+      // Round wide canopy with hanging fruits
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-10 h-4" : "w-6 h-2.5"} bg-emerald-700 rounded-full relative`}>
+          <div className={`absolute ${s ? "bottom-0 left-1.5 w-1.5 h-1.5" : "bottom-0 left-0.5 w-1 h-1"} bg-amber-400 rounded-full`} />
+          <div className={`absolute ${s ? "bottom-0 right-2 w-1.5 h-1.5" : "bottom-0 right-1 w-1 h-1"} bg-amber-400 rounded-full`} />
+        </div>
+        <div className={`${s ? "w-1 h-4" : "w-0.5 h-2.5"} bg-amber-900`} />
+      </div>
+    ),
+    neem: (
+      // Tall oval canopy, dense leaves
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-7 h-7" : "w-4 h-4"} bg-green-800 rounded-full relative`}>
+          <div className={`absolute top-1 left-1 ${s ? "w-2 h-2" : "w-1.5 h-1.5"} bg-green-700 rounded-full`} />
+        </div>
+        <div className={`${s ? "w-1 h-3" : "w-0.5 h-2"} bg-amber-900`} />
+      </div>
+    ),
+    date: (
+      // Palm-style: tall trunk, fan leaves on top
+      <div className="flex flex-col items-center">
+        <div className="flex gap-px items-end">
+          <div className={`${s ? "w-2 h-5" : "w-1 h-3"} bg-emerald-600 rounded-t-full -rotate-[30deg] origin-bottom`} />
+          <div className={`${s ? "w-2 h-6" : "w-1 h-3.5"} bg-emerald-500 rounded-t-full`} />
+          <div className={`${s ? "w-2 h-5" : "w-1 h-3"} bg-emerald-600 rounded-t-full rotate-[30deg] origin-bottom`} />
+        </div>
+        <div className={`${s ? "w-1.5 h-5" : "w-0.5 h-3"} bg-amber-800`} />
+      </div>
+    ),
+    banyan: (
+      // Wide canopy with aerial roots
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-12 h-5" : "w-7 h-3"} bg-green-900 rounded-full`} />
+        <div className="flex gap-px">
+          <div className={`${s ? "w-0.5 h-3" : "w-px h-2"} bg-amber-800`} />
+          <div className={`${s ? "w-1.5 h-4" : "w-0.5 h-2.5"} bg-amber-900`} />
+          <div className={`${s ? "w-0.5 h-3" : "w-px h-2"} bg-amber-800`} />
+        </div>
+      </div>
+    ),
+    cherry: (
+      // Rounded pink canopy with blossoms
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-8 h-6" : "w-5 h-3.5"} bg-pink-800 rounded-full relative`}>
+          <div className={`absolute top-0.5 left-1 ${s ? "w-1.5 h-1.5" : "w-1 h-1"} bg-pink-400 rounded-full`} />
+          <div className={`absolute top-1 right-1.5 ${s ? "w-1.5 h-1.5" : "w-1 h-1"} bg-pink-300 rounded-full`} />
+          <div className={`absolute bottom-0.5 left-2 ${s ? "w-1 h-1" : "w-0.5 h-0.5"} bg-pink-400 rounded-full`} />
+        </div>
+        <div className={`${s ? "w-1 h-3" : "w-0.5 h-2"} bg-amber-900`} />
+      </div>
+    ),
+    oak: (
+      // Thick round dense canopy
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-9 h-7" : "w-5 h-4"} bg-green-800 rounded-full relative`}>
+          <div className={`absolute top-0.5 right-1 ${s ? "w-3 h-3" : "w-2 h-2"} bg-green-700 rounded-full`} />
+        </div>
+        <div className={`${s ? "w-2 h-3" : "w-1 h-2"} bg-amber-900 rounded-sm`} />
+      </div>
+    ),
+    pine: (
+      // Triangle/conical shape
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-0 h-0 border-l-[14px] border-r-[14px] border-b-[20px]" : "w-0 h-0 border-l-[8px] border-r-[8px] border-b-[12px]"} border-l-transparent border-r-transparent border-b-emerald-900`} />
+        <div className={`${s ? "w-0 h-0 border-l-[16px] border-r-[16px] border-b-[14px] -mt-2" : "w-0 h-0 border-l-[10px] border-r-[10px] border-b-[8px] -mt-1"} border-l-transparent border-r-transparent border-b-emerald-800`} />
+        <div className={`${s ? "w-1.5 h-3" : "w-0.5 h-2"} bg-amber-900`} />
+      </div>
+    ),
+    maple: (
+      // Rounded with autumn colors
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-9 h-6" : "w-5 h-3.5"} bg-orange-700 rounded-full relative`}>
+          <div className={`absolute top-0 left-1 ${s ? "w-3 h-3" : "w-2 h-2"} bg-red-700 rounded-full`} />
+          <div className={`absolute bottom-0 right-1 ${s ? "w-2.5 h-2.5" : "w-1.5 h-1.5"} bg-amber-600 rounded-full`} />
+        </div>
+        <div className={`${s ? "w-1 h-3" : "w-0.5 h-2"} bg-amber-900`} />
+      </div>
+    ),
+    bamboo: (
+      // Tall thin stalks with small leaves
+      <div className="flex flex-col items-center">
+        <div className="flex gap-px items-end">
+          <div className={`${s ? "w-1.5 h-8" : "w-0.5 h-5"} bg-lime-700 rounded-t-full`} />
+          <div className={`${s ? "w-1.5 h-10" : "w-0.5 h-6"} bg-lime-600 rounded-t-full`} />
+          <div className={`${s ? "w-1.5 h-7" : "w-0.5 h-4"} bg-lime-700 rounded-t-full`} />
+        </div>
+      </div>
+    ),
+    willow: (
+      // Drooping canopy
+      <div className="flex flex-col items-center">
+        <div className={`${s ? "w-8 h-4" : "w-5 h-2.5"} bg-teal-800 rounded-t-full relative`}>
+          <div className={`absolute -bottom-2 left-0 ${s ? "w-1 h-3" : "w-0.5 h-2"} bg-teal-700 rounded-b-full`} />
+          <div className={`absolute -bottom-2.5 left-2 ${s ? "w-1 h-4" : "w-0.5 h-2.5"} bg-teal-600 rounded-b-full`} />
+          <div className={`absolute -bottom-2 right-1 ${s ? "w-1 h-3" : "w-0.5 h-2"} bg-teal-700 rounded-b-full`} />
+        </div>
+        <div className={`${s ? "w-1 h-3 mt-2" : "w-0.5 h-2 mt-1.5"} bg-amber-900`} />
+      </div>
+    ),
   };
-  const c = colors[type] || colors.mango;
 
   return (
     <div className={`flex flex-col items-center pixel-art ${animate ? "animate-plant-grow" : ""}`}>
-      {/* Canopy */}
-      <div className="relative">
-        <div className={`w-5 h-3 ${c.canopy} rounded-full`} />
-        <div className={`absolute top-0.5 left-0.5 w-1 h-1 ${c.fruit} rounded-full`} />
-        <div className={`absolute top-1 right-1 w-1 h-1 ${c.fruit} rounded-full`} />
-      </div>
-      {/* Trunk */}
-      <div className="w-0.5 h-2.5 bg-amber-900" />
-      {/* Ground */}
-      <div className="w-4 h-0.5 bg-amber-800/50 rounded-full" />
+      {treeShapes[type] || treeShapes.mango}
+      <div className={`${s ? "w-5 h-0.5" : "w-3 h-px"} bg-amber-800/40 rounded-full mt-px`} />
     </div>
   );
 };
