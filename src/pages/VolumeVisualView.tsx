@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Download } from "lucide-react";
 import { getVolumeBySlug, volumePath } from "@/data/catalog";
 import {
   topicMediaUrl,
@@ -99,7 +98,6 @@ export default function VolumeVisualView() {
             onClick={backToVolume}
             className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-dim hover:text-foreground transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
             Back
           </button>
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground truncate text-center">
@@ -144,7 +142,6 @@ export default function VolumeVisualView() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border text-[10px] font-mono uppercase tracking-wider text-dim hover:text-foreground hover:border-primary/30 transition-colors"
           >
-            <Download className="w-3 h-3" />
             Download
           </a>
         </div>
@@ -163,7 +160,6 @@ export default function VolumeVisualView() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border text-[10px] font-mono uppercase tracking-wider text-dim hover:text-foreground hover:border-primary/30 transition-colors"
           >
-            <Download className="w-3 h-3" />
             Download .pptx
           </a>
         </div>

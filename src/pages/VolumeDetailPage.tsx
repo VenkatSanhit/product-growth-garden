@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import {
   getVolumeBySlug,
   getTrackBySlug,
@@ -137,7 +136,7 @@ export default function VolumeDetailPage() {
               to={`/t/${track.slug}/${series.slug}`}
               className="inline-flex items-center gap-1 text-xs text-dim hover:text-foreground transition-colors mb-4 font-mono"
             >
-              <ArrowLeft className="w-3 h-3" /> {series.title}
+              Back · {series.title}
             </Link>
             <div className="flex flex-wrap items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-wider text-dim">
               <span className="text-primary/90">{track.title}</span>

@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { getVolumeBySlug, volumePath } from "@/data/catalog";
 import { topicMediaUrl } from "@/data/topics";
 import { parseReadDocument } from "@/lib/parseReadDocument";
@@ -91,15 +90,12 @@ export default function VolumeReadView() {
             onClick={goBackToVolume}
             className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-dim hover:text-foreground transition-colors shrink-0"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
             Back
           </button>
           <div className="flex items-center gap-2 min-w-0 justify-center">
-            <span className="w-1 h-1 rounded-full bg-primary/90 shrink-0 shadow-[0_0_8px_hsl(var(--primary)/0.6)]" aria-hidden />
             <span className="text-[10px] font-mono uppercase tracking-[0.32em] text-muted-foreground truncate text-center">
               Read · {volume.title}
             </span>
-            <span className="w-1 h-1 rounded-full bg-primary/90 shrink-0 shadow-[0_0_8px_hsl(var(--primary)/0.6)]" aria-hidden />
           </div>
           <button
             type="button"

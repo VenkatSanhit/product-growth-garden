@@ -53,14 +53,16 @@ export function GardenWidget({
       >
         {activeVolumeId ? (
           <div className="flex flex-col items-center">
-            {completedCount === 0 && <div className="text-lg">🌱</div>}
+            {completedCount === 0 && (
+              <span className="text-[9px] font-mono uppercase tracking-wider text-dim">Start</span>
+            )}
             {completedCount === 1 && <PixelSeed animate />}
             {completedCount === 2 && <PixelSprout animate />}
             {isFullyComplete && <PixelTree type={currentTreeType} animate />}
           </div>
         ) : (
-          <div className="flex flex-col items-center">
-            <span className="text-lg">🌳</span>
+          <div className="flex flex-col items-center gap-0.5">
+            <span className="text-[9px] font-mono uppercase tracking-wider text-dim">Forest</span>
             <span className="text-[8px] text-dim font-mono tabular-nums">{garden.length}</span>
           </div>
         )}

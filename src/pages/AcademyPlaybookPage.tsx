@@ -17,7 +17,6 @@ import {
 } from "@/data/academyMap";
 import { GroveAmbience } from "@/components/GroveAmbience";
 import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
 
 function BranchBlock({ branch }: { branch: AcademyBranch }) {
   return (
@@ -30,7 +29,7 @@ function BranchBlock({ branch }: { branch: AcademyBranch }) {
               className="shrink-0 text-[9px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400"
               title="Series milestone on the map"
             >
-              ✅
+              Complete
             </span>
           ) : null}
         </div>
@@ -53,7 +52,6 @@ function BranchBlock({ branch }: { branch: AcademyBranch }) {
                 className="shrink-0 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-primary hover:text-primary/80 transition-colors"
               >
                 {stem.link.label ?? "Open"}
-                <ChevronRight className="w-3 h-3 opacity-70" aria-hidden />
               </Link>
             ) : null}
           </li>
@@ -71,7 +69,6 @@ export default function AcademyPlaybookPage() {
         <header className="border-b border-border">
           <div className="max-w-3xl mx-auto px-4 py-8">
             <div className="flex flex-wrap items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-[0.2em] text-dim">
-              <span className="text-primary">📚</span>
               <span>{academyRoot.title}</span>
               <span className="text-border">·</span>
               <span>{academyRoot.subtitle}</span>
@@ -93,12 +90,15 @@ export default function AcademyPlaybookPage() {
               Trunks and branches
             </h2>
             <Accordion type="multiple" className="w-full border border-border/60 rounded-lg bg-background/30 overflow-hidden">
-              {academyTrunks.map((trunk) => (
+              {academyTrunks.map((trunk, ti) => (
                 <AccordionItem key={trunk.id} value={trunk.id} className="border-border/50 px-1">
                   <AccordionTrigger className="px-3 py-3 hover:no-underline text-left [&[data-state=open]]:bg-muted/15">
                     <span className="flex items-start gap-3 w-full min-w-0">
-                      <span className="text-lg shrink-0" aria-hidden>
-                        {trunk.icon}
+                      <span
+                        className="shrink-0 w-7 h-7 rounded-md border border-border/60 bg-muted/20 flex items-center justify-center text-[10px] font-mono text-dim tabular-nums"
+                        aria-hidden
+                      >
+                        {ti + 1}
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block font-mono text-sm font-semibold text-foreground">{trunk.title}</span>
@@ -147,16 +147,13 @@ export default function AcademyPlaybookPage() {
               {productionWorkflow.map((step, i) => (
                 <li key={step.title} className="flex gap-3">
                   <span
-                    className="shrink-0 w-7 h-7 rounded-md border border-border/60 bg-muted/20 flex items-center justify-center text-sm"
+                    className="shrink-0 w-7 h-7 rounded-md border border-border/60 bg-muted/20 flex items-center justify-center text-[10px] font-mono text-dim tabular-nums"
                     aria-hidden
                   >
-                    {step.icon}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="min-w-0 pt-0.5">
-                    <p className="text-[11px] font-mono font-semibold text-foreground">
-                      <span className="text-dim mr-2">{String(i + 1).padStart(2, "0")}</span>
-                      {step.title}
-                    </p>
+                    <p className="text-[11px] font-mono font-semibold text-foreground">{step.title}</p>
                     <p className="text-[10px] font-mono text-muted-foreground mt-1 leading-relaxed">{step.detail}</p>
                   </div>
                 </li>
@@ -188,8 +185,7 @@ export default function AcademyPlaybookPage() {
               <p className="text-[11px] font-mono text-muted-foreground leading-relaxed">{seriesCompleteMilestone.detail}</p>
             </div>
             <div className="rounded-xl border border-primary/20 bg-primary/[0.04] p-4">
-              <h2 className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-2 flex items-center gap-2">
-                <span aria-hidden>{evergreenOutcome.icon}</span>
+              <h2 className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-2">
                 {evergreenOutcome.title}
               </h2>
               <ul className="text-[11px] font-mono text-muted-foreground space-y-1.5 leading-relaxed">

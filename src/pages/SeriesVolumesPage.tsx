@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { getSeriesBySlug, getTrackBySlug } from "@/data/catalog";
 import { AppShell } from "@/components/AppShell";
 import { VolumeCard } from "@/components/VolumeCard";
@@ -35,7 +34,7 @@ export default function SeriesVolumesPage() {
               to={`/t/${track.slug}`}
               className="inline-flex items-center gap-1 text-xs text-dim hover:text-foreground transition-colors mb-4 font-mono"
             >
-              <ArrowLeft className="w-3 h-3" /> {track.title}
+              Back · {track.title}
             </Link>
             <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-dim mb-1">Branch</p>
             <h1 className="font-mono text-xl font-bold text-foreground tracking-tight">{series.title}</h1>

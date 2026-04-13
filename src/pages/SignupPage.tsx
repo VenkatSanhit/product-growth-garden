@@ -36,7 +36,6 @@ export default function SignupPage() {
     <div className="min-h-screen bg-[hsl(0_0%_4%)] flex flex-col items-center justify-center px-4 text-foreground">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-2">
-          <p className="text-primary text-lg">◈</p>
           <h1 className="font-mono text-lg font-bold tracking-tight">Sign up</h1>
           <p className="text-xs text-muted-foreground leading-relaxed">
             Create a free account on this device. We only store your name and email in your browser—no server, no

@@ -22,7 +22,6 @@ export default function Dashboard() {
         <header className="border-b border-border relative z-10">
           <div className="max-w-3xl mx-auto px-4 py-8">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-primary text-lg">◈</span>
               <h1 className="font-mono text-lg font-bold text-foreground tracking-tight">PM Grove</h1>
             </div>
             <p className="text-xs text-muted-foreground max-w-lg leading-relaxed">

@@ -14,14 +14,13 @@ export interface AcademyBranch {
   id: string;
   title: string;
   summary?: string;
-  /** Matches “✅” on the diagram — curriculum milestone */
+  /** Curriculum milestone (shown as a text badge in the UI) */
   seriesComplete?: boolean;
   stems: AcademyStem[];
 }
 
 export interface AcademyTrunk {
   id: string;
-  icon: string;
   title: string;
   tagline: string;
   /** Catalog track slug — “Open trunk” jumps to real branches */
@@ -30,7 +29,6 @@ export interface AcademyTrunk {
 }
 
 export interface WorkflowStep {
-  icon: string;
   title: string;
   detail: string;
 }
@@ -44,7 +42,6 @@ export const academyRoot = {
 export const academyTrunks: AcademyTrunk[] = [
   {
     id: "foundations",
-    icon: "🏛️",
     title: "Foundations & Mindset",
     tagline: "PM role, flavours, 0→1 vs 1→N",
     catalogTrackSlug: "foundations-pm-thinking",
@@ -62,7 +59,6 @@ export const academyTrunks: AcademyTrunk[] = [
   },
   {
     id: "strategy",
-    icon: "🎯",
     title: "Strategy & Discovery",
     tagline: "Vision, market, value prop, AI shifts",
     catalogTrackSlug: "strategy-discovery",
@@ -129,7 +125,6 @@ export const academyTrunks: AcademyTrunk[] = [
   },
   {
     id: "planning",
-    icon: "📋",
     title: "Planning & Roadmapping",
     tagline: "Roadmaps, backlog, prioritization",
     catalogTrackSlug: "planning-roadmapping",
@@ -168,7 +163,6 @@ export const academyTrunks: AcademyTrunk[] = [
   },
   {
     id: "delivery",
-    icon: "⚙️",
     title: "Delivery & Agile Ops",
     tagline: "Scrum, Kanban, PI/ART, ceremonies",
     catalogTrackSlug: "delivery-agile",
@@ -195,7 +189,6 @@ export const academyTrunks: AcademyTrunk[] = [
   },
   {
     id: "metrics",
-    icon: "📊",
     title: "Metrics, Analytics & Experimentation",
     tagline: "Dashboards, AARRR, A/B testing",
     catalogTrackSlug: "metrics-analytics-growth",
@@ -230,7 +223,6 @@ export const academyTrunks: AcademyTrunk[] = [
   },
   {
     id: "ai",
-    icon: "🤖",
     title: "AI-Native Product Management",
     tagline: "LLM integration, evaluation, ethics",
     catalogTrackSlug: "ai-product-management",
@@ -248,17 +240,16 @@ export const academyTrunks: AcademyTrunk[] = [
         id: "ai-every-track",
         title: "Stems: AI in Every Track",
         stems: [
-          { title: "🎯 Strategy: AI-shaped problems" },
-          { title: "📋 Planning: Roadmapping AI bets" },
-          { title: "⚙️ Delivery: Working with ML teams" },
-          { title: "📊 Metrics: Evaluating AI models" },
+          { title: "Strategy: AI-shaped problems" },
+          { title: "Planning: Roadmapping AI bets" },
+          { title: "Delivery: Working with ML teams" },
+          { title: "Metrics: Evaluating AI models" },
         ],
       },
     ],
   },
   {
     id: "gtm",
-    icon: "🚀",
     title: "GTM, Growth & Lifecycle",
     tagline: "Launch, pricing, retention, sunsetting",
     catalogTrackSlug: "gtm-lifecycle",
@@ -301,42 +292,34 @@ export const volumePillars = [
 
 export const productionWorkflow: WorkflowStep[] = [
   {
-    icon: "🎯",
     title: "Define learning objectives",
     detail: "What should a PM know after?",
   },
   {
-    icon: "📦",
     title: "Collect: volumes",
     detail: "2–5 weekly units = one volume. Organized by pillar: conceptual clarity, context variations, failure patterns, application & templates.",
   },
   {
-    icon: "✍️",
     title: "Write: longform read",
     detail: "Concept + context + mistakes + 1–2 caselets.",
   },
   {
-    icon: "🎧",
     title: "Create: listen version",
     detail: "Script (e.g. via Notebook LM), polish for spoken clarity.",
   },
   {
-    icon: "🎨",
     title: "Design: visual",
     detail: "Key diagram or comparison table — e.g. Vision → Strategy → Roadmap flow.",
   },
   {
-    icon: "📤",
     title: "Publish: weekly",
     detail: "Read + listen + visual as one integrated unit.",
   },
   {
-    icon: "🔄",
     title: "Repeat: next series",
     detail: "Same read/listen/visual flow; feeds the content roadmap.",
   },
   {
-    icon: "🔗",
     title: "Cross-link",
     detail: "Back to related volumes; forward to the next logical topic.",
   },
@@ -349,7 +332,6 @@ export const seriesCompleteMilestone = {
 };
 
 export const evergreenOutcome = {
-  icon: "🌳",
   title: "Result: Evergreen Academy",
   lines: [
     "Tracks stay stable",

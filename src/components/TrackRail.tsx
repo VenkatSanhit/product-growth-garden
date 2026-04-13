@@ -27,7 +27,6 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
         to="/"
         className="mb-4 px-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-foreground hover:text-primary transition-colors"
       >
-        <span className="text-primary mr-1.5">◈</span>
         PM Grove
       </Link>
       <Link
@@ -39,7 +38,7 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
             : "border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/25",
         )}
       >
-        📚 Academy map
+        Academy map
       </Link>
       <p className="px-2 mb-2 text-[8px] font-mono uppercase tracking-[0.28em] text-dim">Trunks</p>
       <ul className="flex flex-col gap-0.5 overflow-y-auto">

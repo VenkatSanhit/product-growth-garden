@@ -21,22 +21,19 @@ export function GamificationOverlay({ stage, treeType, onDismiss }: Gamification
 
   const content = {
     seed: {
-      emoji: "🌰",
-      title: "You earned a seed!",
-      action: "Tap to plant it",
-      done: "Seed planted! 🌱",
+      title: "You earned a seed",
+      action: "Continue",
+      done: "Seed recorded for your forest.",
     },
     water: {
-      emoji: "💧",
-      title: "Time to water!",
-      action: "Tap to pour water",
-      done: "Your sprout is growing! 🌿",
+      title: "Water this stem",
+      action: "Continue",
+      done: "Progress saved.",
     },
     tree: {
-      emoji: "🌳",
-      title: `${formatTreeLabel(treeType)} — revealed!`,
-      action: "Tap to add to your forest",
-      done: "Added to your forest 🎉",
+      title: `${formatTreeLabel(treeType)} unlocked`,
+      action: "Continue",
+      done: "Added to your forest.",
     },
   };
 
@@ -45,8 +42,16 @@ export function GamificationOverlay({ stage, treeType, onDismiss }: Gamification
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-background/80 backdrop-blur-sm animate-fade-in">
       <div className="surface border border-border rounded-xl p-8 max-w-xs text-center">
-        <div className="text-5xl mb-4">
-          {stage === "tree" ? <PixelTree type={treeType} size="lg" animate /> : c.emoji}
+        <div className="mb-4 min-h-[4rem] flex items-center justify-center">
+          {stage === "tree" ? (
+            <PixelTree type={treeType} size="lg" animate />
+          ) : (
+            <div className="w-16 h-16 rounded-lg border-2 border-dashed border-primary/35 flex items-center justify-center">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-dim">
+                {stage === "seed" ? "Seed" : "Water"}
+              </span>
+            </div>
+          )}
         </div>
         <h3 className="font-mono text-foreground text-sm font-bold mb-2">{c.title}</h3>
 
@@ -62,9 +67,9 @@ export function GamificationOverlay({ stage, treeType, onDismiss }: Gamification
         {step === "action" && (
           <button
             onClick={() => setStep("done")}
-            className="mt-4 w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center mx-auto hover:border-primary/60 transition-colors active:scale-95"
+            className="mt-4 px-4 py-2 rounded-md border border-primary/40 text-xs font-mono uppercase tracking-wider text-foreground hover:bg-primary/10 transition-colors"
           >
-            <span className="text-2xl">{stage === "seed" ? "🌱" : stage === "water" ? "🚿" : "✨"}</span>
+            Tap to confirm
           </button>
         )}
 

@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { BookOpen, Headphones, ImageIcon, Check } from "lucide-react";
 import type { TopicFormat } from "@/data/topics";
 
-const formatIcons: Record<string, React.ReactNode> = {
-  read: <BookOpen className="w-4 h-4" />,
-  listen: <Headphones className="w-4 h-4" />,
-  revise: <ImageIcon className="w-4 h-4" />,
+const formatShort: Record<string, string> = {
+  read: "R",
+  listen: "L",
+  revise: "V",
 };
 
 const formatColors: Record<string, string> = {
@@ -67,14 +66,18 @@ export function FormatCard({
     >
       {completed && (
         <div className="absolute top-3 right-3">
-          <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <Check className="w-3 h-3 text-emerald-500" />
-          </div>
+          <span className="text-[9px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+            Done
+          </span>
         </div>
       )}
 
       <div className="flex items-start gap-3">
-        <div className={`mt-0.5 ${formatAccent[format.type]}`}>{formatIcons[format.type]}</div>
+        <div
+          className={`mt-0.5 shrink-0 w-8 h-8 rounded-md border border-border/60 flex items-center justify-center text-[9px] font-mono uppercase tracking-wider ${formatAccent[format.type]}`}
+        >
+          {formatShort[format.type] ?? "—"}
+        </div>
         <div className="flex-1 min-w-0">
           <h3 className="font-mono text-sm font-bold text-foreground tracking-tight">{format.title}</h3>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{format.description}</p>
