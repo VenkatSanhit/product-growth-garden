@@ -29,6 +29,9 @@ jobs:
       - run: npm ci
       - name: Build with repo base path
         run: npm run build -- --base=/${{ github.event.repository.name }}/
+      # GitHub Pages only serves index.html for the site root; without this, /repo/login etc. 404 on refresh/share.
+      - name: SPA fallback (404.html)
+        run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
