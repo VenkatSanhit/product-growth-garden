@@ -3,22 +3,33 @@
  * Canonical content hierarchy lives in `catalog.ts` (Track → Series → Volume).
  *
  * Assets: public/topics/<contentFolder>/ — see each Volume’s `contentFolder` in the catalog.
+ * Paths must include `import.meta.env.BASE_URL` so GitHub Pages (/repo/) and Vercel (/) both work.
  */
-const TOPICS_BASE = "/topics";
+function topicsPublicPrefix(): string {
+  const base = import.meta.env.BASE_URL ?? "/";
+  if (base === "/" || base === "") return "/topics/";
+  const withSlash = base.endsWith("/") ? base : `${base}/`;
+  return `${withSlash}topics/`;
+}
 
 /** Build URL for a file in public/topics/<folder>/, or pass through if already http(s). */
 export function topicMediaUrl(contentFolder: string, filename: string): string {
   const f = filename.trim();
   if (!f) return "";
   if (/^https?:\/\//i.test(f)) return f;
-  return `${TOPICS_BASE}/${contentFolder}/${f}`;
+  const folder = contentFolder.replace(/^\/+|\/+$/g, "");
+  return `${topicsPublicPrefix()}${folder}/${f}`;
 }
 
 /** Absolute URL for embedding (Office viewer, etc.). Safe in browser only. */
 export function topicMediaAbsoluteUrl(contentFolder: string, filename: string): string {
   const path = topicMediaUrl(contentFolder, filename);
   if (/^https?:\/\//i.test(path)) return path;
-  if (typeof window !== "undefined") return `${window.location.origin}${path}`;
+  if (typeof window !== "undefined") {
+    const origin = window.location.origin;
+    if (path.startsWith("/")) return `${origin}${path}`;
+    return `${origin}/${path.replace(/^\/+/, "")}`;
+  }
   return path;
 }
 

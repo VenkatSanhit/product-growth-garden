@@ -1,5 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { tracks } from "@/data/catalog";
+import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
 interface TrackRailProps {
@@ -9,6 +10,8 @@ interface TrackRailProps {
 
 export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const playbookActive = location.pathname === "/playbook";
 
   return (
@@ -19,6 +22,7 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
       )}
       aria-label="Trunks"
     >
+      <div className="flex flex-col min-h-0 flex-1">
       <Link
         to="/"
         className="mb-4 px-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-foreground hover:text-primary transition-colors"
@@ -38,7 +42,7 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
         📚 Academy map
       </Link>
       <p className="px-2 mb-2 text-[8px] font-mono uppercase tracking-[0.28em] text-dim">Trunks</p>
-      <ul className="flex flex-col gap-0.5">
+      <ul className="flex flex-col gap-0.5 overflow-y-auto">
         {tracks.map((t) => {
           const active = t.slug === activeTrackSlug;
           return (
@@ -58,6 +62,24 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
           );
         })}
       </ul>
+      </div>
+
+      <div className="shrink-0 pt-6 px-2 border-t border-border/40">
+        <p className="text-[9px] font-mono text-dim uppercase tracking-wider mb-1">Signed in</p>
+        <p className="text-[10px] font-mono text-muted-foreground truncate mb-3" title={user?.email}>
+          {user?.name ?? "—"}
+        </p>
+        <button
+          type="button"
+          onClick={() => {
+            signOut();
+            navigate("/login");
+          }}
+          className="w-full text-left text-[10px] font-mono uppercase tracking-wider text-dim hover:text-foreground transition-colors py-1.5"
+        >
+          Sign out
+        </button>
+      </div>
     </nav>
   );
 }
