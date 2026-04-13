@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { BrandMark } from "@/components/BrandMark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,7 +29,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[hsl(0_0%_4%)] flex flex-col items-center justify-center px-4 text-foreground">
       <div className="w-full max-w-sm space-y-8">
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <BrandMark size={48} />
+          </div>
           <h1 className="font-mono text-lg font-bold tracking-tight">Log in</h1>
           <p className="text-xs text-muted-foreground leading-relaxed">
             Free access. Enter the email you used when you signed up—no password on this preview build.

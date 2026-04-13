@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { tracks } from "@/data/catalog";
 import { useAuth } from "@/contexts/AuthContext";
+import { BrandMark } from "@/components/BrandMark";
 import { cn } from "@/lib/utils";
 
 interface TrackRailProps {
@@ -25,8 +26,9 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
       <div className="flex flex-col min-h-0 flex-1">
       <Link
         to="/"
-        className="mb-4 px-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-foreground hover:text-primary transition-colors"
+        className="mb-4 px-2 flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-foreground hover:text-primary transition-colors"
       >
+        <BrandMark size={22} />
         PM Grove
       </Link>
       <Link

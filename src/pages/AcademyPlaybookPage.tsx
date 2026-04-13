@@ -16,6 +16,7 @@ import {
   type AcademyBranch,
 } from "@/data/academyMap";
 import { GroveAmbience } from "@/components/GroveAmbience";
+import { BrandMark } from "@/components/BrandMark";
 import { cn } from "@/lib/utils";
 
 function BranchBlock({ branch }: { branch: AcademyBranch }) {
@@ -68,6 +69,10 @@ export default function AcademyPlaybookPage() {
         <GroveAmbience variant="trunk" />
         <header className="border-b border-border">
           <div className="max-w-3xl mx-auto px-4 py-8">
+            <div className="flex items-center gap-3 mb-4">
+              <BrandMark size={32} />
+              <span className="font-mono text-xs font-semibold text-foreground tracking-tight">PM Grove</span>
+            </div>
             <div className="flex flex-wrap items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-[0.2em] text-dim">
               <span>{academyRoot.title}</span>
               <span className="text-border">·</span>

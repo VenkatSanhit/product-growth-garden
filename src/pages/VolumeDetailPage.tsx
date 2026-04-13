@@ -23,6 +23,7 @@ import { GardenWidget } from "@/components/GardenWidget";
 import { GamificationOverlay } from "@/components/GamificationOverlay";
 import { useProgress } from "@/hooks/useProgress";
 import { GroveAmbience } from "@/components/GroveAmbience";
+import { BrandMark } from "@/components/BrandMark";
 
 type GamStage = "seed" | "water" | "tree" | null;
 
@@ -144,7 +145,10 @@ export default function VolumeDetailPage() {
               <span>{series.title}</span>
             </div>
             <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-primary/80">Stem {volume.volumeNumber}</p>
-            <h1 className="font-mono text-xl font-bold text-foreground mt-1 tracking-tight">{volume.title}</h1>
+            <div className="flex items-start gap-3 mt-1">
+              <BrandMark size={36} className="mt-0.5" />
+              <h1 className="font-mono text-xl font-bold text-foreground tracking-tight">{volume.title}</h1>
+            </div>
             <p className="text-sm text-muted-foreground mt-1">{volume.subtitle}</p>
             <p className="text-xs text-muted-foreground/90 mt-3 leading-relaxed">{volume.description}</p>
           </div>

@@ -4,6 +4,7 @@ import { getVolumeBySlug, volumePath } from "@/data/catalog";
 import { topicMediaUrl } from "@/data/topics";
 import { parseReadDocument } from "@/lib/parseReadDocument";
 import { GamificationOverlay } from "@/components/GamificationOverlay";
+import { BrandMark } from "@/components/BrandMark";
 import { useProgress } from "@/hooks/useProgress";
 
 type GamStage = "seed" | "water" | "tree" | null;
@@ -93,6 +94,7 @@ export default function VolumeReadView() {
             Back
           </button>
           <div className="flex items-center gap-2 min-w-0 justify-center">
+            <BrandMark size={20} className="hidden sm:block" />
             <span className="text-[10px] font-mono uppercase tracking-[0.32em] text-muted-foreground truncate text-center">
               Read · {volume.title}
             </span>

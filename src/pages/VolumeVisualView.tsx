@@ -10,6 +10,7 @@ import {
   getPowerPointMediaRef,
 } from "@/data/topics";
 import { GamificationOverlay } from "@/components/GamificationOverlay";
+import { BrandMark } from "@/components/BrandMark";
 import { useProgress } from "@/hooks/useProgress";
 
 type GamStage = "seed" | "water" | "tree" | null;
@@ -100,8 +101,11 @@ export default function VolumeVisualView() {
           >
             Back
           </button>
-          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground truncate text-center">
-            {showDeckEmbedChrome ? "Deck" : "Visual"} · {volume.title}
+          <span className="flex items-center gap-2 min-w-0 justify-center text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground truncate text-center">
+            <BrandMark size={20} className="hidden sm:block shrink-0" />
+            <span className="truncate">
+              {showDeckEmbedChrome ? "Deck" : "Visual"} · {volume.title}
+            </span>
           </span>
           <button
             type="button"

@@ -6,6 +6,7 @@ import { ForestPanel } from "@/components/ForestPanel";
 import { GardenWidget } from "@/components/GardenWidget";
 import { useProgress } from "@/hooks/useProgress";
 import { GroveAmbience } from "@/components/GroveAmbience";
+import { BrandMark } from "@/components/BrandMark";
 import { FallingLeaves } from "@/components/FallingLeaves";
 import { TrunkSilhouette, BranchNetwork } from "@/components/BranchDecoration";
 
@@ -21,7 +22,8 @@ export default function Dashboard() {
 
         <header className="border-b border-border relative z-10">
           <div className="max-w-3xl mx-auto px-4 py-8">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-3 mb-1">
+              <BrandMark size={36} />
               <h1 className="font-mono text-lg font-bold text-foreground tracking-tight">PM Grove</h1>
             </div>
             <p className="text-xs text-muted-foreground max-w-lg leading-relaxed">

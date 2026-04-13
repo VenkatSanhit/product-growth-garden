@@ -6,6 +6,7 @@ import { ForestPanel } from "@/components/ForestPanel";
 import { GardenWidget } from "@/components/GardenWidget";
 import { useProgress } from "@/hooks/useProgress";
 import { GroveAmbience } from "@/components/GroveAmbience";
+import { BrandMark } from "@/components/BrandMark";
 
 export default function SeriesVolumesPage() {
   const { trackSlug, seriesSlug } = useParams<{ trackSlug: string; seriesSlug: string }>();
@@ -37,7 +38,10 @@ export default function SeriesVolumesPage() {
               Back · {track.title}
             </Link>
             <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-dim mb-1">Branch</p>
-            <h1 className="font-mono text-xl font-bold text-foreground tracking-tight">{series.title}</h1>
+            <div className="flex items-center gap-3">
+              <BrandMark size={32} />
+              <h1 className="font-mono text-xl font-bold text-foreground tracking-tight">{series.title}</h1>
+            </div>
             <p className="text-sm text-muted-foreground mt-2 max-w-2xl leading-relaxed">{series.description}</p>
             <p className="text-[10px] font-mono text-dim mt-4 uppercase tracking-wider">
               {series.volumes.length} stems · {explored}/{series.volumes.length} explored

@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { BrandMark } from "@/components/BrandMark";
 
 /** Visible on small screens where the left rail (with Sign out) is hidden. */
 export function MobileSignOutBar() {
@@ -12,7 +13,8 @@ export function MobileSignOutBar() {
 
   return (
     <div className="lg:hidden fixed top-3 right-3 z-[60] flex items-center gap-2">
-      <span className="max-w-[40vw] truncate text-[9px] font-mono text-muted-foreground" title={user.email}>
+      <BrandMark size={22} />
+      <span className="max-w-[32vw] truncate text-[9px] font-mono text-muted-foreground" title={user.email}>
         {user.name}
       </span>
       <button

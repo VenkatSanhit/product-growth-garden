@@ -6,6 +6,7 @@ import { ForestPanel } from "@/components/ForestPanel";
 import { GardenWidget } from "@/components/GardenWidget";
 import { useProgress } from "@/hooks/useProgress";
 import { GroveAmbience } from "@/components/GroveAmbience";
+import { BrandMark } from "@/components/BrandMark";
 
 export default function TrackSeriesPage() {
   const { trackSlug } = useParams<{ trackSlug: string }>();
@@ -33,7 +34,10 @@ export default function TrackSeriesPage() {
               Back · Trunks
             </Link>
             <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-dim mb-1">Trunk</p>
-            <h1 className="font-mono text-xl font-bold text-foreground tracking-tight">{track.title}</h1>
+            <div className="flex items-center gap-3">
+              <BrandMark size={32} />
+              <h1 className="font-mono text-xl font-bold text-foreground tracking-tight">{track.title}</h1>
+            </div>
             <p className="text-sm text-muted-foreground mt-2 max-w-xl leading-relaxed">{track.description}</p>
           </div>
         </header>
