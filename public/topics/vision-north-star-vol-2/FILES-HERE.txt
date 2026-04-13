@@ -1,0 +1,20 @@
+Folder: public/topics/vision-north-star-vol-2/  (Stem 2 — Vision & North Star series)
+
+Names must match src/data/catalog.ts → visionNorthStarSeries → this volume’s media.{read,audio,visual,deck}.
+
+READ
+----
+  read.txt   (already expected)
+
+LISTEN
+------
+  Wired in catalog as: vision-north-star-vol-2.m4a
+  - To use another name, set media.audio in catalog.ts to match the file exactly.
+
+VISUAL
+------
+  Wired as: visual.png (stem page preview + expandable visual)
+  Optional deck: add deck.pptx and media.deck in catalog.ts for fullscreen slide tab.
+  Tip: avoid saving as “visual.png” when the editor appends .png again (you’d get visual.png.png).
+
+Online deck preview (Office/Google) needs a public https:// URL for the file when not deployed — see the Visual page hint.

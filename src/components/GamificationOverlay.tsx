@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { PixelTree } from "@/components/GardenWidget";
+import { PixelTree } from "@/components/pixelTrees";
+import { formatTreeLabel } from "@/data/topics";
 
 type Stage = "seed" | "water" | "tree" | null;
 
@@ -33,9 +34,9 @@ export function GamificationOverlay({ stage, treeType, onDismiss }: Gamification
     },
     tree: {
       emoji: "🌳",
-      title: `A ${treeType} tree has grown!`,
-      action: "Tap to add to your grove",
-      done: "Added to your grove! 🎉",
+      title: `${formatTreeLabel(treeType)} — revealed!`,
+      action: "Tap to add to your forest",
+      done: "Added to your forest 🎉",
     },
   };
 

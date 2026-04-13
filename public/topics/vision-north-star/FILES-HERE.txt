@@ -1,0 +1,28 @@
+One folder for this topic: public/topics/vision-north-star/
+Everything the app needs for Read, Listen, and Visual is posted here.
+
+READ
+----
+  read.txt
+  - Paste from Word (Ctrl+A in Word, paste here) or Word → Save As → Plain Text.
+  - Or replace filename in src/data/topics.ts → media.read (if you use another name).
+
+LISTEN
+------
+  Your audio file, e.g. How_North_Star_Metrics_Guide_Product_Vision.m4a
+  - Name must match media.audio in src/data/topics.ts.
+  - Or set media.audio to a full https://... URL to hosted audio (no file needed here).
+
+VISUAL
+------
+  Put preview image here, e.g. visual.png (optional but recommended).
+
+  Put your PowerPoint in this folder, e.g. Vision_North_Star.pptx
+
+  In src/data/topics.ts set BOTH:
+    media.visual = "visual.png"     (thumbnail on the topic card)
+    media.deck   = "Vision_North_Star.pptx"   (fullscreen deck — same name as your file)
+
+  Online preview uses Microsoft or Google; localhost is often blank — use Download on that page or deploy HTTPS.
+
+Optional: visualMoreUrl + visualMoreLabel in topics.ts.

@@ -1,0 +1,22 @@
+Add a volume (Track → Series → Volume)
+========================================
+
+1) In src/data/catalog.ts:
+   - Add or extend a Series under the right Track.
+   - Add a Volume with: id (unique), slug (URL segment), contentFolder, media.{read,audio,visual}, optional deck, treeType, formats[].
+
+2) Create folder:
+   public/topics/<contentFolder>/
+   (copy from vision-north-star/ as a template)
+
+3) Drop assets:
+   - read.txt (Word: paste or Save As Plain Text)
+   - audio / visual filenames must match media.* in the volume
+
+4) Routes (auto from slugs):
+   /t/<trackSlug>/<seriesSlug>/v/<volumeSlug>
+   Read: .../read   Visual: .../visual
+
+5) Hosted files: set media fields to full https:// URLs — no public copy needed.
+
+Legacy /topic/:id URLs redirect only for vision-north-star → Volume 1.

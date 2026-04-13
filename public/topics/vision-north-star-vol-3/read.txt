@@ -1,0 +1,17 @@
+---
+SECTION
+Volume 3 — Case Files & Patterns
+---
+
+Case-style notes and pattern libraries will accumulate here—revision fuel for interviews, roadmap reviews, and staff meetings.
+
+---
+HEADING
+Coming chapters (outline)
+---
+
+• North Star pivots that worked — and the metrics that lied first  
+• B2B vs consumer — how “vision” shows up differently in metrics  
+• Anti-patterns: vanity dashboards and OKR spreadsheets nobody opens  
+
+Add real case files as sections below. Listen and Visual formats will reference the same stories once produced.
