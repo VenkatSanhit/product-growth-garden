@@ -97,6 +97,18 @@ export default {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "leaf-fall": {
+          "0%": { transform: "translateY(-20px) translateX(0)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "1" },
+          "100%": { transform: "translateY(100vh) translateX(80px)", opacity: "0" },
+        },
+        "leaf-sway": {
+          "0%, 100%": { transform: "translateX(0) rotate(0deg)" },
+          "25%": { transform: "translateX(15px) rotate(10deg)" },
+          "50%": { transform: "translateX(-10px) rotate(-5deg)" },
+          "75%": { transform: "translateX(20px) rotate(8deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -105,6 +117,8 @@ export default {
         "plant-grow": "plant-grow 0.8s ease-out",
         "water-pour": "water-pour 0.6s ease-in-out",
         "fade-in": "fade-in 0.4s ease-out",
+        "leaf-fall": "leaf-fall 12s linear infinite",
+        "leaf-sway": "leaf-sway 3s ease-in-out infinite",
       },
     },
   },
