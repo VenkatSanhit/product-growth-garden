@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/useAuth";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 
 type AuthMode = "signin" | "signup";
 
@@ -15,12 +16,13 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ open, mode, onOpenChange }: AuthModalProps) {
-  const { signIn, signUp, firebaseMode } = useAuth();
+  const { signIn, signUp, sendPasswordReset, firebaseMode } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [resetMsg, setResetMsg] = useState("");
 
   const submit = async () => {
     setError("");
@@ -70,6 +72,25 @@ export function AuthModal({ open, mode, onOpenChange }: AuthModalProps) {
         </DialogHeader>
 
         <div className="space-y-3">
+          {firebaseMode ? (
+            <>
+              <GoogleSignInButton
+                className="w-full"
+                onSuccess={() => {
+                  onOpenChange(false);
+                  navigate("/dashboard");
+                }}
+              />
+              <div className="relative py-1">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-border" />
+                </div>
+                <div className="relative flex justify-center text-[10px] uppercase tracking-wide text-muted-foreground">
+                  <span className="bg-[hsl(0_0%_6%)] px-2">or email</span>
+                </div>
+              </div>
+            </>
+          ) : null}
           {mode === "signup" ? (
             <div>
               <Label htmlFor="signup-name">Full name</Label>
@@ -81,9 +102,32 @@ export function AuthModal({ open, mode, onOpenChange }: AuthModalProps) {
             <Input id="auth-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
-            <Label htmlFor="auth-password">Password</Label>
+            <div className="flex items-center justify-between gap-2">
+              <Label htmlFor="auth-password">Password</Label>
+              {firebaseMode && mode === "signin" ? (
+                <button
+                  type="button"
+                  className="text-[10px] text-primary hover:underline"
+                  onClick={() => {
+                    void (async () => {
+                      setResetMsg("");
+                      setError("");
+                      const res = await sendPasswordReset(email);
+                      if (res.ok) {
+                        setResetMsg("If this email has an account, check your inbox for a reset link.");
+                      } else {
+                        setError(res.message);
+                      }
+                    })();
+                  }}
+                >
+                  Forgot password?
+                </button>
+              ) : null}
+            </div>
             <Input id="auth-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
+          {resetMsg ? <p className="text-xs text-emerald-500">{resetMsg}</p> : null}
           {error ? <p className="text-xs text-amber-400">{error}</p> : null}
           <Button className="w-full" type="button" onClick={() => void submit()}>
             {mode === "signup" ? "Create account" : "Sign in"}

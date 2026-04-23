@@ -214,7 +214,8 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-4 pb-6">
           <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 px-4 py-3 text-[11px] font-mono text-muted-foreground">
             <p className="mb-2 text-amber-600 dark:text-amber-400">
-              Dev: sign in first (rules require auth), seed once, then remove this block or unset VITE_ENABLE_FIREBASE_SEED.
+              Dev: with catalog writes locked in Firestore rules, this button will fail unless you temporarily allow writes or
+              seed via Firebase Console / Admin SDK. Remove this block or unset VITE_ENABLE_FIREBASE_SEED when done.
             </p>
             <Button
               type="button"

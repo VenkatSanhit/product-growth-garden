@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut as firebaseSignOut,
   updateProfile,
   type User,
 } from "firebase/auth";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { AuthContext } from "@/contexts/auth-context";
 import type { AuthResult, GroveUser } from "@/contexts/auth-types";
 import { getDb, getFirebaseAuth, isFirebaseConfigured } from "@/lib/firebase";
@@ -58,6 +61,33 @@ function userFromFirebase(u: User): GroveUser {
   const email = normalizeEmail(u.email || "");
   const name = u.displayName?.trim() || email.split("@")[0] || "PM";
   return { email, name, uid: u.uid };
+}
+
+async function syncFirestoreUserProfile(u: User): Promise<void> {
+  const db = getDb();
+  const ref = doc(db, "users", u.uid);
+  const snap = await getDoc(ref);
+  const e = normalizeEmail(u.email || "");
+  const n = u.displayName?.trim() || e.split("@")[0] || "PM";
+  if (!snap.exists()) {
+    await setDoc(ref, {
+      email: e,
+      name: n,
+      treeCount: 0,
+      createdAt: serverTimestamp(),
+      lastLoginAt: serverTimestamp(),
+    });
+  } else {
+    await setDoc(
+      ref,
+      {
+        email: e,
+        name: n,
+        lastLoginAt: serverTimestamp(),
+      },
+      { merge: true },
+    );
+  }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -135,18 +165,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const auth = getFirebaseAuth();
         await signInWithEmailAndPassword(auth, e, password);
-        const db = getDb();
         const u = getFirebaseAuth().currentUser;
-        if (u) {
-          await setDoc(
-            doc(db, "users", u.uid),
-            {
-              email: e,
-              lastLoginAt: serverTimestamp(),
-            },
-            { merge: true },
-          );
-        }
+        if (u) await syncFirestoreUserProfile(u);
         return { ok: true };
       } catch {
         return { ok: false, message: "Invalid email or password." };
@@ -164,6 +184,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(SESSION_KEY, JSON.stringify({ email: e }));
     setUser({ email: e, name });
     return { ok: true };
+  }, []);
+
+  const signInWithGoogle = useCallback(async (): Promise<AuthResult> => {
+    if (!isFirebaseConfigured()) {
+      return { ok: false, message: "Google sign-in is only available when Firebase is configured." };
+    }
+    try {
+      const auth = getFirebaseAuth();
+      const provider = new GoogleAuthProvider();
+      const cred = await signInWithPopup(auth, provider);
+      await syncFirestoreUserProfile(cred.user);
+      return { ok: true };
+    } catch (err: unknown) {
+      const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : "";
+      if (code === "auth/popup-closed-by-user") {
+        return { ok: false, message: "Sign-in was cancelled." };
+      }
+      if (code === "auth/account-exists-with-different-credential") {
+        return {
+          ok: false,
+          message: "This email is already linked to another sign-in method. Use email/password on the login page.",
+        };
+      }
+      return { ok: false, message: "Google sign-in failed. Enable the Google provider in Firebase Console → Authentication." };
+    }
+  }, []);
+
+  const sendPasswordReset = useCallback(async (email: string): Promise<AuthResult> => {
+    const e = normalizeEmail(email);
+    if (!e) return { ok: false, message: "Enter your email first." };
+    if (!isFirebaseConfigured()) {
+      return { ok: false, message: "Password reset is only available when Firebase is configured." };
+    }
+    try {
+      await sendPasswordResetEmail(getFirebaseAuth(), e);
+      return { ok: true };
+    } catch (err: unknown) {
+      const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : "";
+      if (code === "auth/invalid-email") return { ok: false, message: "That email address looks invalid." };
+      if (code === "auth/missing-email") return { ok: false, message: "Email is required." };
+      return {
+        ok: false,
+        message: "Could not send reset email. Confirm Email/Password is enabled in Firebase Authentication.",
+      };
+    }
   }, []);
 
   const signOut = useCallback(async () => {
@@ -184,9 +249,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       firebaseMode: isFirebaseConfigured(),
       signUp,
       signIn,
+      signInWithGoogle,
+      sendPasswordReset,
       signOut,
     }),
-    [user, signUp, signIn, signOut],
+    [user, signUp, signIn, signInWithGoogle, sendPasswordReset, signOut],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

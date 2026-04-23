@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/useAuth";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { BrandMark } from "@/components/BrandMark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginPage() {
-  const { signIn, firebaseMode } = useAuth();
+  const { signIn, sendPasswordReset, firebaseMode } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: string } | null)?.from ?? "/app";
@@ -15,6 +16,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [resetMsg, setResetMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,10 +39,24 @@ export default function LoginPage() {
           <h1 className="font-mono text-lg font-bold tracking-tight">Log in</h1>
           <p className="text-xs text-muted-foreground leading-relaxed">
             {firebaseMode
-              ? "Sign in with your email and password (Firebase Auth)."
+              ? "Sign in with Google or email and password (Firebase Auth)."
               : "Free access on this device. Enter the email you used when you signed up."}
           </p>
         </div>
+
+        {firebaseMode ? (
+          <div className="space-y-4">
+            <GoogleSignInButton onSuccess={() => navigate(from, { replace: true })} />
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-[10px] font-mono uppercase tracking-wider">
+                <span className="bg-[hsl(0_0%_4%)] px-2 text-muted-foreground">or email</span>
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         <form onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
           <div className="space-y-2">
@@ -60,9 +76,29 @@ export default function LoginPage() {
           </div>
           {firebaseMode ? (
             <div className="space-y-2">
-              <Label htmlFor="login-password" className="text-[11px] font-mono uppercase tracking-wider text-dim">
-                Password
-              </Label>
+              <div className="flex items-center justify-between gap-2">
+                <Label htmlFor="login-password" className="text-[11px] font-mono uppercase tracking-wider text-dim">
+                  Password
+                </Label>
+                <button
+                  type="button"
+                  className="text-[10px] font-mono text-primary hover:underline"
+                  onClick={() => {
+                    void (async () => {
+                      setResetMsg("");
+                      setError("");
+                      const res = await sendPasswordReset(email);
+                      if (res.ok) {
+                        setResetMsg("If this email has an account, Firebase sent a reset link. Check your inbox and spam.");
+                      } else {
+                        setError(res.message);
+                      }
+                    })();
+                  }}
+                >
+                  Forgot password?
+                </button>
+              </div>
               <Input
                 id="login-password"
                 type="password"
@@ -73,6 +109,10 @@ export default function LoginPage() {
                 className="font-mono text-sm bg-background/80"
               />
             </div>
+          ) : null}
+
+          {resetMsg ? (
+            <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 leading-relaxed">{resetMsg}</p>
           ) : null}
 
           {error ? (

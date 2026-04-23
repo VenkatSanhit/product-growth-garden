@@ -13,5 +13,9 @@ export type AuthContextValue = {
   firebaseMode: boolean;
   signUp: (email: string, name: string, password: string) => Promise<AuthResult>;
   signIn: (email: string, password?: string) => Promise<AuthResult>;
+  /** Firebase only: popup sign-in with Google (enable provider in Firebase Console). */
+  signInWithGoogle: () => Promise<AuthResult>;
+  /** Firebase only: sends Firebase password-reset email if Email/Password is enabled. */
+  sendPasswordReset: (email: string) => Promise<AuthResult>;
   signOut: () => Promise<void>;
 };

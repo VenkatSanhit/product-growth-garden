@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/useAuth";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { BrandMark } from "@/components/BrandMark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -52,10 +53,24 @@ export default function SignupPage() {
           <h1 className="font-mono text-lg font-bold tracking-tight">Sign up</h1>
           <p className="text-xs text-muted-foreground leading-relaxed">
             {firebaseMode
-              ? "Create an account with Firebase (email + password)."
+              ? "Create an account with Google or email + password (Firebase)."
               : "Create a free account on this device. Name and email are stored locally for now."}
           </p>
         </div>
+
+        {firebaseMode ? (
+          <div className="space-y-4">
+            <GoogleSignInButton onSuccess={() => navigate(from, { replace: true })} />
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-[10px] font-mono uppercase tracking-wider">
+                <span className="bg-[hsl(0_0%_4%)] px-2 text-muted-foreground">or email</span>
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         <form onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
           <div className="space-y-2">
