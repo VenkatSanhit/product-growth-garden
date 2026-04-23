@@ -790,12 +790,13 @@
   border-bottom: 1px solid hsl(var(--border));
 }
 .forest-feature-image-wrap {
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
   border-radius: 0.9rem;
   overflow: hidden;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
-  min-height: clamp(13rem, 28vw, 20rem);
+  width: min(100%, 62rem);
+  min-height: clamp(9rem, 18vw, 13rem);
 }
 .forest-feature-image {
   width: 100%;
