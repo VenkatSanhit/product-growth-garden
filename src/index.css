@@ -788,9 +788,6 @@
   background: hsl(var(--surface));
   border-top: 1px solid hsl(var(--border));
   border-bottom: 1px solid hsl(var(--border));
-  margin-inline: calc(50% - 50vw);
-  width: 100vw;
-  max-width: 100vw;
 }
 .forest-feature-image-wrap {
   margin-bottom: 1rem;
@@ -798,7 +795,7 @@
   overflow: hidden;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
-  min-height: clamp(10.5rem, 22vw, 16rem);
+  min-height: clamp(13rem, 28vw, 20rem);
 }
 .forest-feature-image {
   width: 100%;
