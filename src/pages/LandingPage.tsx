@@ -8,6 +8,7 @@ import { BrandMark } from "@/components/BrandMark";
 import { useAuth } from "@/contexts/useAuth";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import { seedGroveDatabase } from "@/lib/groveFirestore";
+import { DigitalGlyphTree } from "@/components/landing/DigitalGlyphTree";
 
 const trunks = [
   ["Market Sizing & Segmentation", "TAM/SAM/SOM the right way. Jobs-to-be-done segmentation. Bottoms-up modeling. Competitive wedges.", "6 branches · 18 stems"],
@@ -114,12 +115,15 @@ export default function LandingPage() {
           <div className="hero-tree">
             <img
               src={`${import.meta.env.BASE_URL}landing-forest-night.png`}
-              alt="PM Grove night forest concept"
-              className="hero-tree-image"
+              alt=""
+              className="hero-tree-image hero-tree-image--bed"
               onError={(e) => {
                 e.currentTarget.src = `${import.meta.env.BASE_URL}landing-hero-tree.png`;
               }}
             />
+            <div className="hero-tree-overlay">
+              <DigitalGlyphTree />
+            </div>
           </div>
         </section>
 
@@ -135,7 +139,7 @@ export default function LandingPage() {
             <article className="how-card">
               <Headphones size={18} />
               <h3>Listen on the go</h3>
-              <p>Each case study ships as a 12-min podcast episode for commute, gym, or walk.</p>
+              <p>Each case study ships as a 30+ minute podcast episode for commute, gym, or walk.</p>
               <span>Play episode → Seed sprouts 🪴</span>
             </article>
             <article className="how-card">

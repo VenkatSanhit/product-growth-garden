@@ -515,6 +515,115 @@
   opacity: 0.95;
   filter: saturate(0.95) contrast(1.06);
 }
+.hero-tree-image--bed {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  filter: saturate(0) contrast(1.15) blur(1.2px);
+  pointer-events: none;
+}
+.hero-tree-overlay {
+  position: relative;
+  z-index: 1;
+  min-height: 22rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 0.75rem;
+}
+
+/* Digital glyph tree — minimal lab / collaborative nodes (hero) */
+.digital-glyph-tree {
+  position: relative;
+  font-family: "JetBrains Mono", "Space Mono", ui-monospace, monospace;
+  font-size: clamp(0.52rem, 1.35vw, 0.72rem);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  color: hsl(var(--foreground) / 0.88);
+  text-align: center;
+  user-select: none;
+}
+.digital-glyph-tree::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 42%,
+    hsl(var(--accent) / 0.07) 50%,
+    transparent 58%
+  );
+  background-size: 100% 240%;
+  animation: digital-tree-scan 5.5s linear infinite;
+  pointer-events: none;
+}
+.digital-glyph-tree__row {
+  white-space: pre;
+  display: block;
+}
+.digital-glyph-tree__sp {
+  opacity: 0;
+}
+.digital-glyph-tree__glyph {
+  display: inline-block;
+  transform-origin: center center;
+  animation: digital-tree-sway 5.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.digital-glyph-tree__glyph--accent {
+  color: hsl(var(--accent));
+  text-shadow: 0 0 12px hsl(var(--accent) / 0.35);
+}
+.digital-glyph-tree__glyph--dim {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.75;
+}
+.digital-glyph-tree__caption {
+  margin-top: 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+}
+.hero-tree:hover .digital-glyph-tree__glyph {
+  animation-duration: 2.8s;
+}
+.hero-tree:hover .digital-glyph-tree {
+  filter: brightness(1.06);
+}
+
+@keyframes digital-tree-sway {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: perspective(520px) rotateY(-18deg) rotateX(6deg) translateZ(0);
+  }
+  50% {
+    opacity: 1;
+    transform: perspective(520px) rotateY(18deg) rotateX(-6deg) translateZ(0);
+  }
+}
+@keyframes digital-tree-scan {
+  0% {
+    background-position: 0 -120%;
+  }
+  100% {
+    background-position: 0 120%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .digital-glyph-tree__glyph {
+    animation: none !important;
+    opacity: 0.82;
+  }
+  .hero-tree:hover .digital-glyph-tree__glyph {
+    animation: none !important;
+  }
+  .digital-glyph-tree::after {
+    animation: none !important;
+  }
+}
 
 .landing-section {
   max-width: 72rem;
