@@ -8,9 +8,8 @@ import { BrandMark } from "@/components/BrandMark";
 import { useAuth } from "@/contexts/useAuth";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import { seedGroveDatabase } from "@/lib/groveFirestore";
-import { DigitalGlyphTree } from "@/components/landing/DigitalGlyphTree";
-import { TrunkDigitalCluster } from "@/components/landing/TrunkDigitalCluster";
 import { ForestTreeCell } from "@/components/landing/ForestTreeCell";
+import { TrunkRevealSection } from "@/components/landing/TrunkRevealSection";
 
 const trunks = [
   ["Market Sizing & Segmentation", "TAM/SAM/SOM the right way. Jobs-to-be-done segmentation. Bottoms-up modeling. Competitive wedges.", "6 branches · 18 stems"],
@@ -117,15 +116,12 @@ export default function LandingPage() {
           <div className="hero-tree">
             <img
               src={`${import.meta.env.BASE_URL}landing-forest-night.png`}
-              alt=""
-              className="hero-tree-image hero-tree-image--bed"
+              alt="Night forest — PM Grove"
+              className="hero-tree-image"
               onError={(e) => {
                 e.currentTarget.src = `${import.meta.env.BASE_URL}landing-hero-tree.png`;
               }}
             />
-            <div className="hero-tree-overlay">
-              <DigitalGlyphTree />
-            </div>
           </div>
         </section>
 
@@ -154,19 +150,7 @@ export default function LandingPage() {
           <p className="loop-line">Stem → Branch → Trunk → Forest</p>
         </section>
 
-        <section className="landing-section">
-          <h2>Four trunks. Every PM skill you need.</h2>
-          <div className="trunk-grid">
-            {trunks.map(([title, body, meta], idx) => (
-              <article key={title} className="trunk-card">
-                <TrunkDigitalCluster variant={idx} />
-                <h3>{title}</h3>
-                <p>{body}</p>
-                <small>{meta}</small>
-              </article>
-            ))}
-          </div>
-        </section>
+        <TrunkRevealSection trunks={trunks} />
 
         <section id="forest" className="landing-section forest-section">
           <h2>Every skill becomes a tree in your forest</h2>
