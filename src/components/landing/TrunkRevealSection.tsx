@@ -1,7 +1,9 @@
 import { useSectionInView } from "@/hooks/useSectionInView";
 import { TreeGlyphSilhouette } from "@/components/landing/TreeGlyphSilhouette";
+import { TrunkFlickerText } from "@/components/landing/TrunkFlickerText";
 
-type TrunkRow = readonly [string, string, string];
+/** [title, single-line detail] */
+type TrunkRow = readonly [string, string];
 
 export function TrunkRevealSection({ trunks }: { trunks: readonly TrunkRow[] }) {
   const { ref, inView } = useSectionInView<HTMLElement>();
@@ -16,14 +18,17 @@ export function TrunkRevealSection({ trunks }: { trunks: readonly TrunkRow[] }) 
       <div className="landing-trunk-reveal__contain">
         <h2 id="four-trunks-heading">Four trunks. Every PM skill you need.</h2>
         <div className="trunk-reveal-grid">
-          {trunks.map(([title, body, meta], idx) => (
+          {trunks.map(([title, detail], idx) => (
             <article key={title} className="trunk-reveal-card">
               <div className={`trunk-reveal-tree-wrap trunk-reveal-tree-wrap--${idx}`}>
                 <TreeGlyphSilhouette variant={idx} active={inView} />
               </div>
-              <h3>{title}</h3>
-              <p>{body}</p>
-              <small>{meta}</small>
+              <h3 className="trunk-reveal-card__title">
+                <TrunkFlickerText text={title} />
+              </h3>
+              <p className="trunk-reveal-card__detail" title={detail}>
+                <TrunkFlickerText text={detail} />
+              </p>
             </article>
           ))}
         </div>

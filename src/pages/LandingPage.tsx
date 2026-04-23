@@ -12,10 +12,16 @@ import { ForestTreeCell } from "@/components/landing/ForestTreeCell";
 import { TrunkRevealSection } from "@/components/landing/TrunkRevealSection";
 
 const trunks = [
-  ["Market Sizing & Segmentation", "TAM/SAM/SOM the right way. Jobs-to-be-done segmentation. Bottoms-up modeling. Competitive wedges.", "6 branches · 18 stems"],
-  ["Discovery & Validation", "User interview frameworks. PMF signals. MVP scoping. How to fail cheaply and learn fast.", "6 branches · 18 stems"],
-  ["Metrics & Data", "North star metrics. AI-native KPIs. Retention cohorts. Measuring what actually matters.", "6 branches · 18 stems"],
-  ["AI Product Strategy", "Building on LLMs. AI-native UX patterns. Positioning against incumbents. When AI is the moat.", "6 branches · 18 stems"],
+  [
+    "Market Sizing & Segmentation",
+    "TAM · SAM · JTBD · bottoms-up · wedges · competitive maps · 6 branches · 18 stems",
+  ],
+  [
+    "Discovery & Validation",
+    "User interviews · PMF signals · MVP scope · learn fast · 6 branches · 18 stems",
+  ],
+  ["Metrics & Data", "North star · cohorts · retention · AI-native KPIs · 6 branches · 18 stems"],
+  ["AI Product Strategy", "LLMs · AI UX patterns · positioning · moats · 6 branches · 18 stems"],
 ] as const;
 
 function NothingAccentText({ text }: { text: string }) {
