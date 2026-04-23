@@ -144,7 +144,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (code === "auth/email-already-in-use") {
           return { ok: false, message: "That email is already registered. Try signing in." };
         }
-        return { ok: false, message: "Could not create account. Check password length (6+ chars)." };
+        if (code === "auth/operation-not-allowed") {
+          return { ok: false, message: "Email/Password sign-in is disabled in Firebase Auth Sign-in method." };
+        }
+        if (code === "auth/invalid-api-key") {
+          return { ok: false, message: "Invalid Firebase API key in this build/env." };
+        }
+        if (code === "auth/unauthorized-domain") {
+          return { ok: false, message: "This domain is not authorized in Firebase Authentication." };
+        }
+        if (code === "auth/weak-password") {
+          return { ok: false, message: "Password is too weak. Use at least 6 characters." };
+        }
+        return {
+          ok: false,
+          message: `Could not create account (${code || "unknown error"}). Check Firebase Auth + env config.`,
+        };
       }
     }
 
@@ -168,8 +183,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const u = getFirebaseAuth().currentUser;
         if (u) await syncFirestoreUserProfile(u);
         return { ok: true };
-      } catch {
-        return { ok: false, message: "Invalid email or password." };
+      } catch (err: unknown) {
+        const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : "";
+        if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
+          return { ok: false, message: "Invalid email or password." };
+        }
+        return { ok: false, message: `Sign-in failed (${code || "unknown error"}).` };
       }
     }
 
@@ -207,7 +226,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           message: "This email is already linked to another sign-in method. Use email/password on the login page.",
         };
       }
-      return { ok: false, message: "Google sign-in failed. Enable the Google provider in Firebase Console → Authentication." };
+      if (code === "auth/unauthorized-domain") {
+        return { ok: false, message: "This domain is not authorized for Google sign-in in Firebase Authentication." };
+      }
+      if (code === "auth/invalid-api-key") {
+        return { ok: false, message: "Invalid Firebase API key in this build/env." };
+      }
+      return { ok: false, message: `Google sign-in failed (${code || "unknown error"}).` };
     }
   }, []);
 
