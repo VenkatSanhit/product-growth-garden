@@ -784,7 +784,14 @@
     background-position: 0 100%;
   }
 }
-.forest-section { background: hsl(var(--surface)); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
+.forest-section {
+  background: hsl(var(--surface));
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+  max-width: 100vw;
+}
 .forest-feature-image-wrap {
   margin-bottom: 1rem;
   border-radius: 0.9rem;
@@ -797,7 +804,7 @@
   height: auto;
   display: block;
   object-fit: contain;
-  max-height: 26rem;
+  max-height: none;
 }
 .forest-grid {
   display: grid;
