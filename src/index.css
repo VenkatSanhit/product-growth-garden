@@ -545,17 +545,6 @@
     animation: none !important;
     opacity: 0 !important;
   }
-  .forest-tree-cell__layer {
-    transition: none !important;
-  }
-  .forest-tree-cell__layer--b {
-    display: none;
-  }
-  .forest-tree-cell__layer--a {
-    opacity: 1 !important;
-    filter: none !important;
-    transform: translate(-50%, -50%) !important;
-  }
 }
 
 .landing-section {
@@ -573,6 +562,11 @@
   border: 1px solid hsl(var(--border));
   border-radius: 0.9rem;
   padding: 1rem;
+}
+.how-card-heading-motion {
+  margin-top: 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 .how-card span { display: inline-block; margin-top: 0.6rem; color: hsl(var(--muted-foreground)); font-size: 0.78rem; }
 .loop-line { margin-top: 1rem; color: hsl(var(--muted-foreground)); font-size: 0.9rem; }
@@ -818,7 +812,7 @@
   border: 1px solid hsl(var(--border));
   background: radial-gradient(circle at 50% 35%, rgba(74, 222, 128, 0.4), rgba(20, 33, 26, 0.9));
 }
-.forest-tree-cell {
+.forest-tree-pixel-slot {
   position: relative;
   display: flex;
   align-items: center;
@@ -826,52 +820,12 @@
   overflow: hidden;
   cursor: default;
 }
-.forest-tree-cell__pixel-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.forest-tree-pixel-slot__inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  image-rendering: pixelated;
-}
-.forest-tree-cell__layer {
-  margin: 0;
-  padding: 0;
-  font-family: "JetBrains Mono", "Space Mono", ui-monospace, monospace;
-  font-size: clamp(0.45rem, 1.1vw, 0.58rem);
-  line-height: 1.08;
-  color: rgba(240, 253, 244, 0.94);
-  text-shadow: 0 0 10px rgba(34, 197, 94, 0.45);
-  white-space: pre;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition:
-    opacity 0.42s steps(6, end),
-    filter 0.42s ease,
-    transform 0.42s ease;
-}
-.forest-tree-cell__layer--b {
-  opacity: 0;
-  filter: blur(9px) contrast(3);
-  transform: translate(-50%, -50%) scale(1.35);
-}
-.forest-tree-cell:hover .forest-tree-cell__layer--a {
-  opacity: 0;
-  filter: blur(8px) contrast(2);
-  transform: translate(-50%, -50%) scale(0.78);
-}
-.forest-tree-cell:hover .forest-tree-cell__layer--b {
-  opacity: 1;
-  filter: blur(0) contrast(1.05);
-  transform: translate(-50%, -50%) scale(1);
-}
-.forest-tree-cell:hover {
-  border-color: rgba(74, 222, 128, 0.55);
-  box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.2) inset;
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.35));
 }
 .price-card.popular { border-color: #22c55e; box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25) inset; }
 .cta-end { text-align: center; }

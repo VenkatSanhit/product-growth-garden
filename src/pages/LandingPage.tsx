@@ -8,7 +8,8 @@ import { BrandMark } from "@/components/BrandMark";
 import { useAuth } from "@/contexts/useAuth";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import { seedGroveDatabase } from "@/lib/groveFirestore";
-import { ForestTreeCell } from "@/components/landing/ForestTreeCell";
+import { ForestRandomPixelTrees } from "@/components/landing/ForestRandomPixelTrees";
+import { LandingAnimatedHeading } from "@/components/landing/LandingAnimatedHeading";
 import { TrunkRevealSection } from "@/components/landing/TrunkRevealSection";
 
 const trunks = [
@@ -100,11 +101,11 @@ export default function LandingPage() {
         <section className="landing-hero">
           <div>
             <p className="landing-eyebrow">Weekly PM Skill Builder</p>
-            <h1>
+            <LandingAnimatedHeading level={1}>
               <NothingAccentText text="Grow your PM skills." />
               <br />
               <NothingAccentText text="One tree at a time." />
-            </h1>
+            </LandingAnimatedHeading>
             <p>
               A weekly learning system built on real products. Read. Listen. Visualize. Watch your knowledge become a
               forest.
@@ -132,23 +133,29 @@ export default function LandingPage() {
         </section>
 
         <section id="how" className="landing-section">
-          <h2>From trunk to tree in three steps</h2>
+          <LandingAnimatedHeading level={2}>From trunk to tree in three steps</LandingAnimatedHeading>
           <div className="how-grid">
             <article className="how-card">
               <Leaf size={18} />
-              <h3>Read the deep dive</h3>
+              <LandingAnimatedHeading level={3} className="how-card-heading-motion">
+                Read the deep dive
+              </LandingAnimatedHeading>
               <p>Each week, one real product case study through discovery, metrics, and market sizing.</p>
               <span>Mark as Done → Earn your Seed 🌱</span>
             </article>
             <article className="how-card">
               <Headphones size={18} />
-              <h3>Listen on the go</h3>
+              <LandingAnimatedHeading level={3} className="how-card-heading-motion">
+                Listen on the go
+              </LandingAnimatedHeading>
               <p>Each case study ships as a 30+ minute podcast episode for commute, gym, or walk.</p>
               <span>Play episode → Seed sprouts 🪴</span>
             </article>
             <article className="how-card">
               <PanelsTopLeft size={18} />
-              <h3>Lock it in visually</h3>
+              <LandingAnimatedHeading level={3} className="how-card-heading-motion">
+                Lock it in visually
+              </LandingAnimatedHeading>
               <p>Interactive map or infographic to revise frameworks and plant your tree.</p>
               <span>Finish map → Tree planted 🌳</span>
             </article>
@@ -159,7 +166,7 @@ export default function LandingPage() {
         <TrunkRevealSection trunks={trunks} />
 
         <section id="forest" className="landing-section forest-section">
-          <h2>Every skill becomes a tree in your forest</h2>
+          <LandingAnimatedHeading level={2}>Every skill becomes a tree in your forest</LandingAnimatedHeading>
           <div className="forest-feature-image-wrap">
             <img
               src={`${import.meta.env.BASE_URL}landing-forest-desert.png`}
@@ -167,11 +174,7 @@ export default function LandingPage() {
               className="forest-feature-image"
             />
           </div>
-          <div className="forest-grid">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <ForestTreeCell key={i} species={i} />
-            ))}
-          </div>
+          <ForestRandomPixelTrees />
           <p className="landing-stats">Forest score: 3 trees planted, 1 growing</p>
           <Button className="landing-btn-primary" onClick={() => setAuthOpen("signup")}>
             Claim your forest
@@ -179,7 +182,7 @@ export default function LandingPage() {
         </section>
 
         <section className="landing-section">
-          <h2>From the community</h2>
+          <LandingAnimatedHeading level={2}>From the community</LandingAnimatedHeading>
           <div className="test-grid">
             <article className="test-card">
               <p>"Day 8 on Perplexity changed how I write PRDs for AI features."</p>
@@ -197,7 +200,7 @@ export default function LandingPage() {
         </section>
 
         <section className="landing-section cta-end">
-          <h2>Start your first tree today</h2>
+          <LandingAnimatedHeading level={2}>Start your first tree today</LandingAnimatedHeading>
           <p>Day 1 is already waiting. No setup. Just open, read, and plant.</p>
           <Button className="landing-btn-primary" onClick={() => setAuthOpen("signup")}>
             Grow your first tree →
