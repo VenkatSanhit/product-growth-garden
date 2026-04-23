@@ -796,7 +796,7 @@
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
   width: min(100%, 62rem);
-  min-height: clamp(7.5rem, 14vw, 10.5rem);
+  min-height: clamp(6.8rem, 12.5vw, 9.2rem);
 }
 .forest-feature-image {
   width: 100%;
