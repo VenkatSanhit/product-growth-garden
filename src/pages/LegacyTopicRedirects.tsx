@@ -7,17 +7,17 @@ const V1 = "/t/strategy-discovery/vision-north-star/v/volume-1";
 export function LegacyTopicRedirect() {
   const { id } = useParams<{ id: string }>();
   if (id === LEGACY_TOPIC_ID) return <Navigate to={V1} replace />;
-  return <Navigate to="/" replace />;
+  return <Navigate to="/app" replace />;
 }
 
 export function LegacyTopicReadRedirect() {
   const { id } = useParams<{ id: string }>();
   if (id === LEGACY_TOPIC_ID) return <Navigate to={`${V1}/read`} replace />;
-  return <Navigate to="/" replace />;
+  return <Navigate to="/app" replace />;
 }
 
 export function LegacyTopicVisualRedirect() {
   const { id } = useParams<{ id: string }>();
   if (id === LEGACY_TOPIC_ID) return <Navigate to={`${V1}/visual`} replace />;
-  return <Navigate to="/" replace />;
+  return <Navigate to="/app" replace />;
 }

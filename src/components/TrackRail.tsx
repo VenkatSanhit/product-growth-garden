@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { tracks } from "@/data/catalog";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/useAuth";
 import { BrandMark } from "@/components/BrandMark";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-  const playbookActive = location.pathname === "/playbook";
+  const playbookActive = location.pathname === "/app/playbook";
 
   return (
     <nav
@@ -25,14 +25,14 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
     >
       <div className="flex flex-col min-h-0 flex-1">
       <Link
-        to="/"
+        to="/app"
         className="mb-4 px-2 flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-foreground hover:text-primary transition-colors"
       >
         <BrandMark size={22} />
         PM Grove
       </Link>
       <Link
-        to="/playbook"
+        to="/app/playbook"
         className={cn(
           "mb-5 px-2 py-2 rounded-md block text-[10px] font-mono uppercase tracking-[0.15em] border transition-colors",
           playbookActive
@@ -73,8 +73,7 @@ export function TrackRail({ activeTrackSlug, className }: TrackRailProps) {
         <button
           type="button"
           onClick={() => {
-            signOut();
-            navigate("/login");
+            void signOut().then(() => navigate("/login"));
           }}
           className="w-full text-left text-[10px] font-mono uppercase tracking-wider text-dim hover:text-foreground transition-colors py-1.5"
         >

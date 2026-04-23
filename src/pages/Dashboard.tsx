@@ -31,7 +31,7 @@ export default function Dashboard() {
               listen, and visual modes.
             </p>
             <Link
-              to="/playbook"
+              to="/app/playbook"
               className="inline-flex mt-4 text-[10px] font-mono uppercase tracking-[0.18em] text-primary hover:text-primary/80 border border-primary/30 rounded-md px-3 py-2 transition-colors hover:bg-primary/5"
             >
               View full academy map — playbook index →

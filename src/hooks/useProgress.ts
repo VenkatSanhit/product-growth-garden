@@ -1,5 +1,7 @@
 import { useState, useCallback } from "react";
 import { LEGACY_VOLUME_MIGRATION } from "@/data/catalog";
+import { getFirebaseAuth, isFirebaseConfigured } from "@/lib/firebase";
+import { syncLeafToFirestore } from "@/lib/groveFirestore";
 
 export interface VolumeProgress {
   read: boolean;
@@ -99,6 +101,12 @@ export function useProgress() {
       }
 
       save({ volumeProgress: newVolumeProgress, garden: newGarden, version: 2 });
+
+      if (isFirebaseConfigured()) {
+        const uid = getFirebaseAuth().currentUser?.uid;
+        if (uid) syncLeafToFirestore(uid, volumeId, formatType);
+      }
+
       return updated;
     },
     [state, save],

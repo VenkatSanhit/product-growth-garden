@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/useAuth";
 import { BrandMark } from "@/components/BrandMark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function SignupPage() {
-  const { signUp } = useAuth();
+  const { signUp, firebaseMode } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string } | null)?.from ?? "/";
+  const from = (location.state as { from?: string } | null)?.from ?? "/app";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     const n = name.trim();
@@ -29,7 +30,15 @@ export default function SignupPage() {
       setError("Email is required.");
       return;
     }
-    signUp(em, n);
+    if (firebaseMode && !password.trim()) {
+      setError("Password is required (6+ characters).");
+      return;
+    }
+    const res = await signUp(em, n, password);
+    if (!res.ok) {
+      setError(res.message);
+      return;
+    }
     navigate(from, { replace: true });
   };
 
@@ -42,12 +51,13 @@ export default function SignupPage() {
           </div>
           <h1 className="font-mono text-lg font-bold tracking-tight">Sign up</h1>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Create a free account on this device. We only store your name and email in your browser—no server, no
-            password for now.
+            {firebaseMode
+              ? "Create an account with Firebase (email + password)."
+              : "Create a free account on this device. Name and email are stored locally for now."}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="signup-name" className="text-[11px] font-mono uppercase tracking-wider text-dim">
               Name
@@ -78,6 +88,22 @@ export default function SignupPage() {
               className="font-mono text-sm bg-background/80"
             />
           </div>
+          {firebaseMode ? (
+            <div className="space-y-2">
+              <Label htmlFor="signup-password" className="text-[11px] font-mono uppercase tracking-wider text-dim">
+                Password
+              </Label>
+              <Input
+                id="signup-password"
+                type="password"
+                autoComplete="new-password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="font-mono text-sm bg-background/80"
+              />
+            </div>
+          ) : null}
 
           {error ? (
             <p className="text-[11px] font-mono text-amber-600 dark:text-amber-400">{error}</p>

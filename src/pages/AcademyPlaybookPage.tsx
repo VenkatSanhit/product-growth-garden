@@ -203,7 +203,7 @@ export default function AcademyPlaybookPage() {
 
           <p className="text-center">
             <Link
-              to="/"
+              to="/app"
               className="text-[10px] font-mono uppercase tracking-wider text-dim hover:text-foreground transition-colors"
             >
               ← Back to grove home

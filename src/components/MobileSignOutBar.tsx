@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/useAuth";
 import { BrandMark } from "@/components/BrandMark";
 
 /** Visible on small screens where the left rail (with Sign out) is hidden. */
@@ -7,7 +7,7 @@ export function MobileSignOutBar() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const onAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  const onAuthPage = location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup";
 
   if (!user || onAuthPage) return null;
 
@@ -20,8 +20,7 @@ export function MobileSignOutBar() {
       <button
         type="button"
         onClick={() => {
-          signOut();
-          navigate("/login");
+          void signOut().then(() => navigate("/login"));
         }}
         className="rounded-md border border-border/60 bg-background/90 px-2 py-1 text-[9px] font-mono uppercase tracking-wider text-dim backdrop-blur-sm hover:text-foreground"
       >

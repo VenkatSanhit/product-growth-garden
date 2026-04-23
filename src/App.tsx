@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/contexts/AuthProvider";
 import { RequireAuth } from "@/components/RequireAuth";
 import Dashboard from "./pages/Dashboard";
+import LandingPage from "./pages/LandingPage";
 import TrackSeriesPage from "./pages/TrackSeriesPage";
 import SeriesVolumesPage from "./pages/SeriesVolumesPage";
 import VolumeDetailPage from "./pages/VolumeDetailPage";
@@ -33,11 +34,13 @@ const App = () => (
         <AuthProvider>
           <MobileSignOutBar />
           <Routes>
+            <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route element={<RequireAuth />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/playbook" element={<AcademyPlaybookPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/app" element={<Dashboard />} />
+              <Route path="/app/playbook" element={<AcademyPlaybookPage />} />
               <Route path="/t/:trackSlug" element={<TrackSeriesPage />} />
               <Route path="/t/:trackSlug/:seriesSlug" element={<SeriesVolumesPage />} />
               <Route path="/t/:trackSlug/:seriesSlug/v/:volumeSlug" element={<VolumeDetailPage />} />

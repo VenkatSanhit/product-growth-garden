@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   getVolumeBySlug,
   getTrackBySlug,
@@ -43,6 +43,7 @@ export default function VolumeDetailPage() {
   const { getVolumeProgress, completeFormat, garden } = useProgress();
   const [gamStage, setGamStage] = useState<GamStage>(null);
   const [openFormat, setOpenFormat] = useState<"listen" | "revise" | null>(null);
+  const navigate = useNavigate();
 
   if (!track || !series || !volume) {
     return (
@@ -58,7 +59,6 @@ export default function VolumeDetailPage() {
   const visualUrl = topicMediaUrl(folder, volume.media.visual);
   const pptRef = getPowerPointMediaRef({ media: volume.media });
   const visualIsPpt = Boolean(pptRef);
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
 
   const handleComplete = (formatType: FormatType) => {
     const prev = getVolumeProgress(volume.id);
@@ -71,13 +71,9 @@ export default function VolumeDetailPage() {
     else if (newCount === 3) setGamStage("tree");
   };
 
-  const openReadInNewTab = () => {
-    window.open(`${origin}${volumeReadPath(track.slug, series.slug, volume.slug)}`, "_blank", "noopener,noreferrer");
-  };
+  const openRead = () => navigate(volumeReadPath(track.slug, series.slug, volume.slug));
 
-  const openVisualInNewTab = () => {
-    window.open(`${origin}${volumeVisualPath(track.slug, series.slug, volume.slug)}`, "_blank", "noopener,noreferrer");
-  };
+  const openVisual = () => navigate(volumeVisualPath(track.slug, series.slug, volume.slug));
 
   const listenSlot = audioUrl ? (
     <div className="rounded-lg border border-accent/30 bg-accent/5 px-3 py-4">
@@ -171,8 +167,8 @@ export default function VolumeDetailPage() {
                     expanded={false}
                     onComplete={() => handleComplete("read")}
                     onToggleOpen={() => {}}
-                    onActivate={openReadInNewTab}
-                    actionHint="Reader · new tab"
+                    onActivate={openRead}
+                    actionHint="Open reader"
                   />
                 );
               }
@@ -200,8 +196,8 @@ export default function VolumeDetailPage() {
                       expanded={false}
                       onComplete={() => handleComplete("revise")}
                       onToggleOpen={() => {}}
-                      onActivate={openVisualInNewTab}
-                      actionHint="Deck · new tab"
+                      onActivate={openVisual}
+                      actionHint="Open visual"
                       secondarySlot={
                         isRasterImageMediaRef(volume.media.visual) ? (
                           <div className="rounded-md border border-emerald-500/20 overflow-hidden bg-black/40">

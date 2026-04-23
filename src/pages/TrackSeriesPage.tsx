@@ -28,7 +28,7 @@ export default function TrackSeriesPage() {
         <header className="border-b border-border">
           <div className="max-w-3xl mx-auto px-4 py-6">
             <Link
-              to="/"
+              to="/app"
               className="inline-flex items-center gap-1 text-xs text-dim hover:text-foreground transition-colors mb-4 font-mono"
             >
               Back · Trunks
