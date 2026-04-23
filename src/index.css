@@ -798,12 +798,13 @@
   overflow: hidden;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
+  min-height: clamp(14rem, 34vw, 26rem);
 }
 .forest-feature-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   max-height: none;
 }
 .forest-grid {
