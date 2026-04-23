@@ -500,7 +500,7 @@
 .landing-stats { margin-top: 0.8rem; font-size: 0.82rem; color: hsl(var(--muted-foreground)); }
 
 .hero-tree {
-  min-height: 22rem;
+  min-height: clamp(18rem, 36vw, 30rem);
   border: 1px solid hsl(var(--border));
   border-radius: 1rem;
   background: radial-gradient(circle at 50% 10%, hsl(var(--primary) / 0.12), transparent 56%), hsl(var(--card));
@@ -510,8 +510,8 @@
 .hero-tree-image {
   width: 100%;
   height: 100%;
-  min-height: 22rem;
-  object-fit: contain;
+  min-height: clamp(18rem, 36vw, 30rem);
+  object-fit: cover;
   display: block;
   opacity: 0.98;
   filter: saturate(0.96) contrast(1.06);
@@ -798,7 +798,7 @@
   overflow: hidden;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
-  min-height: clamp(14rem, 34vw, 26rem);
+  min-height: clamp(18rem, 36vw, 30rem);
 }
 .forest-feature-image {
   width: 100%;
