@@ -7,6 +7,7 @@ import { GardenWidget } from "@/components/GardenWidget";
 import { useProgress } from "@/hooks/useProgress";
 import { GroveAmbience } from "@/components/GroveAmbience";
 import { BrandMark } from "@/components/BrandMark";
+import { FallingLeaves } from "@/components/FallingLeaves";
 import { TrunkSilhouette, BranchNetwork } from "@/components/BranchDecoration";
 
 export default function Dashboard() {
@@ -16,7 +17,10 @@ export default function Dashboard() {
     <AppShell>
       <div className="relative min-h-screen pb-24 overflow-hidden">
         <GroveAmbience variant="trunk" />
+        <FallingLeaves density={22} types={["leaf", "twig", "petal"]} />
         <TrunkSilhouette className="left-1/2 -translate-x-1/2 top-0 opacity-15 pointer-events-none z-0" />
+        <TrunkSilhouette className="left-8 top-10 opacity-[0.07] pointer-events-none z-0 scale-75" />
+        <TrunkSilhouette className="right-8 top-20 opacity-[0.06] pointer-events-none z-0 scale-75" />
 
         <header className="relative z-10">
           <div className="max-w-3xl mx-auto px-4 py-8">
@@ -49,6 +53,7 @@ export default function Dashboard() {
 
         <div className="relative z-10">
           <BranchNetwork className="top-0 left-0 opacity-35 pointer-events-none" />
+          <BranchNetwork className="bottom-0 left-0 opacity-20 pointer-events-none rotate-180" />
           <div className="max-w-3xl mx-auto px-4 py-8 relative">
             <h2 className="text-[10px] font-mono uppercase tracking-[0.22em] text-dim mb-4 flex items-center gap-2">
               <span className="h-px w-6 bg-gradient-to-r from-transparent to-primary/45" aria-hidden />

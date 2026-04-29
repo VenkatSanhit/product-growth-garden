@@ -60,6 +60,30 @@ export function TrunkSilhouette({ className = "" }: BranchProps) {
         strokeWidth="2"
         strokeLinecap="round"
       />
+      <path
+        d="M124 205C104 188 78 178 48 182"
+        stroke="hsl(var(--border) / 0.16)"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M156 228C176 213 202 206 234 210"
+        stroke="hsl(var(--border) / 0.16)"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M128 390C112 374 90 366 66 371"
+        stroke="hsl(var(--border) / 0.14)"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M152 430C171 418 196 413 222 420"
+        stroke="hsl(var(--border) / 0.14)"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -127,6 +151,31 @@ export function BranchNetwork({ className = "" }: BranchProps) {
         strokeWidth="1"
         strokeLinecap="round"
       />
+      {/* Extra canopy branches */}
+      <path
+        d="M235 155C220 134 196 120 166 112"
+        stroke="hsl(var(--border) / 0.1)"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M565 155C580 134 604 120 634 112"
+        stroke="hsl(var(--border) / 0.1)"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M320 170C308 150 286 134 258 126"
+        stroke="hsl(var(--border) / 0.09)"
+        strokeWidth="1"
+        strokeLinecap="round"
+      />
+      <path
+        d="M480 170C492 150 514 134 542 126"
+        stroke="hsl(var(--border) / 0.09)"
+        strokeWidth="1"
+        strokeLinecap="round"
+      />
       {/* Tiny leaf clusters at branch tips */}
       <circle cx="220" cy="108" r="3" fill="hsl(var(--primary) / 0.08)" />
       <circle cx="110" cy="103" r="4" fill="hsl(var(--primary) / 0.06)" />
@@ -136,6 +185,10 @@ export function BranchNetwork({ className = "" }: BranchProps) {
       <circle cx="515" cy="138" r="2.5" fill="hsl(var(--primary) / 0.07)" />
       <circle cx="10" cy="88" r="3" fill="hsl(var(--accent) / 0.06)" />
       <circle cx="790" cy="88" r="3" fill="hsl(var(--accent) / 0.06)" />
+      <circle cx="166" cy="110" r="2.4" fill="hsl(var(--primary) / 0.07)" />
+      <circle cx="258" cy="124" r="2.2" fill="hsl(var(--accent) / 0.06)" />
+      <circle cx="634" cy="110" r="2.4" fill="hsl(var(--primary) / 0.07)" />
+      <circle cx="542" cy="124" r="2.2" fill="hsl(var(--accent) / 0.06)" />
     </svg>
   );
 }
