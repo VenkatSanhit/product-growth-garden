@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PixelTree } from "@/components/pixelTrees";
+import { PixelSeed, PixelSprout, PixelTree } from "@/components/pixelTrees";
 import { formatTreeLabel } from "@/data/topics";
 
 type Stage = "seed" | "water" | "tree" | null;
@@ -46,9 +46,10 @@ export function GamificationOverlay({ stage, treeType, onDismiss }: Gamification
           {stage === "tree" ? (
             <PixelTree type={treeType} size="lg" animate />
           ) : (
-            <div className="w-16 h-16 rounded-lg border-2 border-dashed border-primary/35 flex items-center justify-center">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-dim">
-                {stage === "seed" ? "Seed" : "Water"}
+            <div className="w-20 h-20 rounded-xl border border-primary/25 bg-primary/5 flex flex-col items-center justify-center gap-2">
+              {stage === "seed" ? <PixelSeed animate /> : <PixelSprout animate />}
+              <span className="text-[10px] font-mono uppercase tracking-widest text-primary/85">
+                {stage === "seed" ? "Seed earned" : "Sapling watered"}
               </span>
             </div>
           )}

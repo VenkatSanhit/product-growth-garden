@@ -184,13 +184,10 @@ export default function LandingPage() {
 
         <section id="forest" className="landing-section forest-section">
           <LandingAnimatedHeading level={2}>Every skill becomes a tree in your forest</LandingAnimatedHeading>
-          <div className="forest-feature-image-wrap">
-            <img
-              src={`${import.meta.env.BASE_URL}landing-forest-desert.png`}
-              alt="Tree progress visual in PM Grove"
-              className="forest-feature-image"
-            />
-          </div>
+          <p className="mx-auto max-w-2xl text-sm text-muted-foreground leading-relaxed">
+            Track your progress as each completed stem grows from seed to sapling to a fully planted tree inside your
+            personal PM learning forest.
+          </p>
           <ForestRandomPixelTrees />
           <p className="landing-stats">Forest score: 3 trees planted, 1 growing</p>
           <Button className="landing-btn-primary" onClick={startLearning}>

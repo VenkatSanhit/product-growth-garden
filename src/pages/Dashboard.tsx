@@ -7,7 +7,6 @@ import { GardenWidget } from "@/components/GardenWidget";
 import { useProgress } from "@/hooks/useProgress";
 import { GroveAmbience } from "@/components/GroveAmbience";
 import { BrandMark } from "@/components/BrandMark";
-import { FallingLeaves } from "@/components/FallingLeaves";
 import { TrunkSilhouette, BranchNetwork } from "@/components/BranchDecoration";
 
 export default function Dashboard() {
@@ -17,35 +16,33 @@ export default function Dashboard() {
     <AppShell>
       <div className="relative min-h-screen pb-24 overflow-hidden">
         <GroveAmbience variant="trunk" />
-        <FallingLeaves density={10} types={["leaf", "petal"]} />
-        <TrunkSilhouette className="left-1/2 -translate-x-1/2 top-0 opacity-30 pointer-events-none z-0" />
+        <TrunkSilhouette className="left-1/2 -translate-x-1/2 top-0 opacity-15 pointer-events-none z-0" />
 
-        <header className="border-b border-border relative z-10">
+        <header className="relative z-10">
           <div className="max-w-3xl mx-auto px-4 py-8">
-            <div className="flex items-center gap-3 mb-1">
-              <BrandMark size={36} />
-              <h1 className="font-mono text-lg font-bold text-foreground tracking-tight">PM Grove</h1>
-            </div>
-            <p className="text-xs text-muted-foreground max-w-lg leading-relaxed">
-              Concept-driven product learning. Trunks hold branches; branches hold stems; each stem opens in read,
-              listen, and visual modes.
-            </p>
-            <Link
-              to="/app/playbook"
-              className="inline-flex mt-4 text-[10px] font-mono uppercase tracking-[0.18em] text-primary hover:text-primary/80 border border-primary/30 rounded-md px-3 py-2 transition-colors hover:bg-primary/5"
-            >
-              View full academy map — playbook index →
-            </Link>
-            <div className="mt-6 flex items-center gap-2">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" className="text-dim shrink-0">
-                <path
-                  d="M8 0C6 3 4 5 2 6C0 7 0 9 1 10C2 11 4 11 5 10C6 9 7 7 8 5C9 7 10 9 11 10C12 11 14 11 15 10C16 9 16 7 14 6C12 5 10 3 8 0Z"
-                  fill="currentColor"
-                  opacity="0.3"
-                />
-              </svg>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="rounded-2xl border border-primary/20 bg-gradient-to-b from-background/90 via-background/85 to-background/70 backdrop-blur-xl shadow-[0_24px_80px_-40px_rgba(22,163,74,0.45)] p-6 md:p-7">
+              <div className="flex items-center gap-3 mb-2">
+                <BrandMark size={34} />
+                <h1 className="font-mono text-lg font-bold text-foreground tracking-tight">PM Grove</h1>
+              </div>
+              <p className="text-sm text-muted-foreground max-w-xl leading-relaxed">
+                Your premium PM learning studio. Move stem by stem across read, listen, and visual modes to grow a
+                lasting knowledge forest.
+              </p>
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-primary">
+                  {garden.length} trees planted
+                </span>
+                <span className="rounded-full border border-border/70 bg-background/40 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-dim">
+                  3 learning modes per stem
+                </span>
+              </div>
+              <Link
+                to="/app/playbook"
+                className="inline-flex mt-5 text-[10px] font-mono uppercase tracking-[0.18em] text-primary hover:text-primary/80 border border-primary/30 rounded-md px-3 py-2 transition-colors hover:bg-primary/5"
+              >
+                View full academy map — playbook index →
+              </Link>
             </div>
           </div>
         </header>

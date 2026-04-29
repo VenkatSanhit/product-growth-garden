@@ -7,6 +7,12 @@ const formatShort: Record<string, string> = {
   revise: "V",
 };
 
+const formatDoneIcon: Record<string, string> = {
+  read: "🌱",
+  listen: "💧",
+  revise: "🪴",
+};
+
 const formatColors: Record<string, string> = {
   read: "border-primary/20 hover:border-primary/40",
   listen: "border-accent/20 hover:border-accent/40",
@@ -66,7 +72,8 @@ export function FormatCard({
     >
       {completed && (
         <div className="absolute top-3 right-3">
-          <span className="text-[9px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+          <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+            <span aria-hidden>{formatDoneIcon[format.type] ?? "✓"}</span>
             Done
           </span>
         </div>
