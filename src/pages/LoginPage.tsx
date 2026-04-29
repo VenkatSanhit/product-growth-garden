@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/useAuth";
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginPage() {
-  const { signIn, sendPasswordReset, firebaseMode } = useAuth();
+  const { user, signIn, sendPasswordReset, firebaseMode } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: string } | null)?.from ?? "/app";
@@ -17,6 +17,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [resetMsg, setResetMsg] = useState("");
+
+  useEffect(() => {
+    if (!user) return;
+    navigate(from, { replace: true });
+  }, [user, navigate, from]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

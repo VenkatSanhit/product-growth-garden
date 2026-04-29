@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -16,13 +16,19 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ open, mode, onOpenChange }: AuthModalProps) {
-  const { signIn, signUp, sendPasswordReset, firebaseMode } = useAuth();
+  const { user, signIn, signUp, sendPasswordReset, firebaseMode } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [resetMsg, setResetMsg] = useState("");
+
+  useEffect(() => {
+    if (!open || !user) return;
+    onOpenChange(false);
+    navigate("/dashboard");
+  }, [open, user, onOpenChange, navigate]);
 
   const submit = async () => {
     setError("");

@@ -212,11 +212,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const auth = getFirebaseAuth();
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
       const cred = await signInWithPopup(auth, provider);
       await syncFirestoreUserProfile(cred.user);
       return { ok: true };
     } catch (err: unknown) {
       const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : "";
+      if (code === "auth/popup-blocked" || code === "auth/cancelled-popup-request") {
+        return {
+          ok: false,
+          message: "Google popup was blocked. Allow popups for this site and try again.",
+        };
+      }
       if (code === "auth/popup-closed-by-user") {
         return { ok: false, message: "Sign-in was cancelled." };
       }

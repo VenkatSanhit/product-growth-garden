@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Leaf, Headphones, PanelsTopLeft } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -43,9 +43,18 @@ function NothingAccentText({ text }: { text: string }) {
 
 export default function LandingPage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState<null | "signin" | "signup">(null);
   const [seeding, setSeeding] = useState(false);
+
+  const startLearning = () => {
+    if (user) {
+      navigate("/app");
+      return;
+    }
+    setAuthOpen("signup");
+  };
 
   const showFirestoreSeed =
     isFirebaseConfigured() &&
@@ -78,12 +87,20 @@ export default function LandingPage() {
             <a href="#forest">The Forest</a>
           </nav>
           <div className="landing-actions">
-            <Button variant="ghost" className="landing-btn-ghost" onClick={() => setAuthOpen("signin")}>
-              Sign in
-            </Button>
-            <Button className="landing-btn-primary" onClick={() => setAuthOpen("signup")}>
-              Start Growing
-            </Button>
+            {user ? (
+              <Button className="landing-btn-primary" onClick={startLearning}>
+                Enter your grove
+              </Button>
+            ) : (
+              <>
+                <Button variant="ghost" className="landing-btn-ghost" onClick={() => setAuthOpen("signin")}>
+                  Sign in
+                </Button>
+                <Button className="landing-btn-primary" onClick={startLearning}>
+                  Start Growing
+                </Button>
+              </>
+            )}
           </div>
           <button type="button" className="landing-menu" onClick={() => setMenuOpen((v) => !v)}>
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -111,7 +128,7 @@ export default function LandingPage() {
               forest.
             </p>
             <div className="landing-hero-cta">
-              <Button className="landing-btn-primary" onClick={() => setAuthOpen("signup")}>
+              <Button className="landing-btn-primary" onClick={startLearning}>
                 Start Growing - it's free
               </Button>
               <a href="#how" className="landing-btn-link">
@@ -176,8 +193,8 @@ export default function LandingPage() {
           </div>
           <ForestRandomPixelTrees />
           <p className="landing-stats">Forest score: 3 trees planted, 1 growing</p>
-          <Button className="landing-btn-primary" onClick={() => setAuthOpen("signup")}>
-            Claim your forest
+          <Button className="landing-btn-primary" onClick={startLearning}>
+            {user ? "Open your forest" : "Claim your forest"}
           </Button>
         </section>
 
@@ -202,8 +219,8 @@ export default function LandingPage() {
         <section className="landing-section cta-end">
           <LandingAnimatedHeading level={2}>Start your first tree today</LandingAnimatedHeading>
           <p>Day 1 is already waiting. No setup. Just open, read, and plant.</p>
-          <Button className="landing-btn-primary" onClick={() => setAuthOpen("signup")}>
-            Grow your first tree →
+          <Button className="landing-btn-primary" onClick={startLearning}>
+            {user ? "Continue learning →" : "Grow your first tree →"}
           </Button>
           <small>No credit card required · Cancel anytime · Your forest is permanent</small>
         </section>

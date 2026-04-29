@@ -15,10 +15,12 @@ export function GoogleSignInButton({ className, onSuccess }: Props) {
   if (!firebaseMode) return null;
 
   const click = async () => {
+    // Start Firebase auth immediately from the direct click gesture.
+    const signInPromise = signInWithGoogle();
     setError("");
     setBusy(true);
     try {
-      const res = await signInWithGoogle();
+      const res = await signInPromise;
       if (res.ok) onSuccess?.();
       else setError(res.message);
     } finally {
@@ -35,7 +37,7 @@ export function GoogleSignInButton({ className, onSuccess }: Props) {
         disabled={busy}
         onClick={() => void click()}
       >
-        {busy ? "Opening Google…" : "Continue with Google"}
+        {busy ? "Redirecting to Google…" : "Continue with Google"}
       </Button>
       {error ? <p className="text-[11px] font-mono text-amber-600 dark:text-amber-400">{error}</p> : null}
     </div>
